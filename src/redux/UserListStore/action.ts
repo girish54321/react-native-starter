@@ -34,12 +34,12 @@ export const setUserData = () => async (dispatch: any, getState: any) => {
     });
 }
 
-export const setUserListError = payload => ({
+export const setUserListError = (payload: any) => ({
   type: ActionTypes.SET_USER_ERROR,
   payload
 
 })
 
-export const setHomeLoading = payload => ({
+export const setHomeLoading = (payload: any) => ({
   type: ActionTypes.SET_USER_LOADING,
 })

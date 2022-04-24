@@ -25,6 +25,7 @@ export const UsersScreen: NavigationScreen<Route.WELCOME> = (props: any) => {
                 {data.users.map((value: UserList, index: number) => {
                     return (
                         <ListItem name={value.name} email={value.email}
+                            key={String(index)}
                             image={"https://www.w3schools.com/w3images/avatar2.png"} />
                     )
                 })}
