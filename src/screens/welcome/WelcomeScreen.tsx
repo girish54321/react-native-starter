@@ -36,13 +36,13 @@ export const WelcomeScreen = (props: any) => {
         return {
             opacity: opacity.value,
             transform: [
-                {
-                    scale: interpolate(
-                        opacity.value,
-                        [0.5, 1],
-                        [0.5, 1.2]
-                    )
-                }
+                // {
+                //     scale: interpolate(
+                //         opacity.value,
+                //         [0.5, 1],
+                //         [0.5, 1.2]
+                //     )
+                // }
                 // { translateX: touchx.value },
                 // { translateY: touchY.value }
             ]
@@ -51,9 +51,9 @@ export const WelcomeScreen = (props: any) => {
 
     useEffect(() => {
         //* withTiming
-        opacity.value = withTiming(1, {
-            duration: 8000,
-        })
+        // opacity.value = withTiming(1, {
+        //     duration: 8000,
+        // })
 
         //* withSpring 
         // opacity.value = withSpring(1)
@@ -69,18 +69,18 @@ export const WelcomeScreen = (props: any) => {
         // )
 
         //* withSequence
-        // opacity.value = withSequence(
-        //     withSpring(1),
-        //     withSpring(0.5),
-        //     withSpring(1)
-        // )
+        opacity.value = withSequence(
+            withSpring(1),
+            withSpring(0.5),
+            withSpring(1)
+        )
     }, [])
 
 
 
     return (
         <AppView>
-            {/* <Animated.ScrollView onScroll={scrollHandler}
+            <Animated.ScrollView onScroll={scrollHandler}
                 scrollEventThrottle={16}
                 style={{
                     height: '100%',
@@ -91,21 +91,21 @@ export const WelcomeScreen = (props: any) => {
                     justifyContent: 'center'
                 }}
             >
-                <PanGestureHandler onGestureEvent={gestureHandler}> */}
-            <Animated.View style={[{ flex: 1 }, animatedStyle]}>
-                <Column alignItems="center" justifyContent="center" style={[style.container,]}>
-                    <Text>homePage NS: {t('homePage:welcome')}</Text>
-                    <Text>Default NS: {t('ok')}</Text>
-                    <AppButton
-                        onPress={() => {
-                            console.log("React Native");
-                        }}>
-                        <Text>React Native Starter</Text>
-                    </AppButton>
-                </Column>
-            </Animated.View>
-            {/* </PanGestureHandler>
-            </Animated.ScrollView> */}
+                {/* <PanGestureHandler onGestureEvent={gestureHandler}> */}
+                <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+                    <Column alignItems="center" justifyContent="center" style={[style.container,]}>
+                        <Text>homePage NS: {t('homePage:welcome')}</Text>
+                        <Text>Default NS: {t('ok')}</Text>
+                        <AppButton
+                            onPress={() => {
+                                console.log("React Native");
+                            }}>
+                            <Text>React Native Starter</Text>
+                        </AppButton>
+                    </Column>
+                </Animated.View>
+                {/* </PanGestureHandler> */}
+            </Animated.ScrollView>
         </AppView>
     );
 }

@@ -1,7 +1,15 @@
-import React, { FC } from "react";
+import React from "react";
 import * as Animatable from 'react-native-animatable';
 import { List, Avatar, Divider } from 'react-native-paper';
-export const ListItem: FC<any> = props => {
+
+interface listItemProps {
+    name: string,
+    email: string
+    style: any,
+    image: string | null
+}
+
+export const ListItem = (props: listItemProps) => {
     const { style, name, email, image } = props;
     return (
         <Animatable.View animation="slideInDown" style={{ margin: 8, ...style }}>
