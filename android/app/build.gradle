@@ -177,7 +177,7 @@ android {
             resValue "string", "app_name", "Starter DEV"
             resValue "string", "base_url", "www.dev.com"
             resValue "string", "BUILD_ENV", "DEV"
-            resValue "string", "CodePushDeploymentKey", "Hdb4t1CJ7wEMLIy_cujCBq56vGait646Y6hvL"
+            resValue "string", "CodePushDeploymentKey", "jLOrVrHK1JdsyoKMG5msgdgf20ApBkgWhk1ii"
             applicationIdSuffix ".dev"
         }
         staging {

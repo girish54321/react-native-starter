@@ -22,6 +22,7 @@
     "android_apk_dev": "cd android && ./gradlew assembleDevRelease",
     "android_staging_dev": "cd android && ./gradlew assembleStagingRelease",
     "android_prod_dev": "cd android && ./gradlew assembleProdRelease",
+    "deploy_dev":"appcenter codepush release-react -a parategirish50-gmail.com/Starter-App -d Dev",
     "deply_stageing": "appcenter codepush release-react -a parategirish50-gmail.com/Starter-App -d Staging",
     "deply_prod": "appcenter codepush release-react -a parategirish50-gmail.com/Starter-App -d Production",
     "ios_deploy_stageing": "appcenter codepush release-react -a parategirish50-gmail.com/Starter-App-iOS -d Staging",
