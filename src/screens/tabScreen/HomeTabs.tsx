@@ -1,28 +1,26 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ListItem } from '@components/ListItem/ListItem';
 import Animated, { useSharedValue, useAnimatedStyle, interpolate, useAnimatedScrollHandler, Extrapolate } from "react-native-reanimated";
 import '../../localization';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Title, Paragraph } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { AppView } from '@components/Flex/Flex';
 const Tab = createMaterialTopTabNavigator();
 
 
-export const TabViewApp = () => {
+export const HomeTabs = () => {
 
     const { t } = useTranslation();
 
     const scrollY = useSharedValue(0);
     const scrollHandler = useAnimatedScrollHandler((event) => {
-        console.log(event)
         scrollY.value = event.contentOffset.y;
     })
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
-            backgroundColor: 'red',
             height: interpolate(
                 scrollY.value,
                 [10, 300],
@@ -62,7 +60,11 @@ export const TabViewApp = () => {
                     onScroll={scrollHandler}
                     scrollEventThrottle={18}
                     renderItem={(item, index) => {
-                        return <ListItem name={'Girish'} email={'name@gmail.com'} />
+                        return <ListItem
+                            name={'Girish'}
+                            email={'name@gmail.com'}
+                            image={`https://randomuser.me/api/portraits/men/${item.index}.jpg`}
+                        />
                     }} />
             </View>
         );

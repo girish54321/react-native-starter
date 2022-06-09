@@ -29,7 +29,7 @@ import { authType } from 'redux/authStore/authReducers';
 import AsyncStorage from '@react-native-community/async-storage';
 import { checkUserLogin } from 'redux/authStore/action';
 import { setTopLevelNavigator } from './NavigationService';
-import { TabViewApp } from '@screens/tabScreen/tab1';
+import { HomeTabs, TabViewApp } from '@screens/tabScreen/HomeTabs';
 
 const Stack = createStackNavigator();
 const SettingStack = createStackNavigator();
@@ -93,8 +93,14 @@ export const Navigation: FC = () => {
     const HomeStack = () => {
         return (
             <Stack.Navigator screenOptions={{ ...HOME_STACK_OPTIONS, title: t('starterApp') }}>
+                {/* 
+                    //* react-native-reanimated Example in HomeScreen
+                */}
                 {/* <Stack.Screen name={Route.WELCOME} component={WelcomeScreen} /> */}
-                <Stack.Screen name={Route.WELCOME} component={TabViewApp} />
+                {/* 
+                    //* react-native-reanimated with in scrollable header
+                */}
+                <Stack.Screen name={Route.WELCOME} component={HomeTabs} />
             </Stack.Navigator>
         )
     }
