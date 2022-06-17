@@ -77,7 +77,7 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.js",
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -126,6 +126,11 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+      }
+
     defaultConfig {
         applicationId "com.starter"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -172,7 +177,7 @@ android {
             resValue "string", "app_name", "Starter DEV"
             resValue "string", "base_url", "www.dev.com"
             resValue "string", "BUILD_ENV", "DEV"
-            resValue "string", "CodePushDeploymentKey", "Hdb4t1CJ7wEMLIy_cujCBq56vGait646Y6hvL"
+            resValue "string", "CodePushDeploymentKey", "jLOrVrHK1JdsyoKMG5msgdgf20ApBkgWhk1ii"
             applicationIdSuffix ".dev"
         }
         staging {
