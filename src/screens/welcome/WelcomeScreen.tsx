@@ -6,6 +6,7 @@ import '../../localization';
 import { useTranslation } from 'react-i18next';
 import Animated, { useSharedValue, useAnimatedStyle, interpolate, withTiming, withSpring, withDelay, withRepeat, withSequence, useAnimatedGestureHandler, useAnimatedScrollHandler } from "react-native-reanimated";
 import { PanGestureHandler } from "react-native-gesture-handler";
+import { View } from "react-native-animatable";
 
 export const WelcomeScreen = (props: any) => {
 
@@ -27,6 +28,7 @@ export const WelcomeScreen = (props: any) => {
 
     const scrollY = useSharedValue(0);
 
+    const rotate = useSharedValue(0)
 
     const scrollHandler = useAnimatedScrollHandler((event) => {
         scrollY.value = event.contentOffset.y;
@@ -49,6 +51,35 @@ export const WelcomeScreen = (props: any) => {
         }
     })
 
+    const mazaStyle = useAnimatedStyle(() => {
+        return {
+            width: 160,
+            height: 160,
+            backgroundColor: 'red',
+
+            transform: [
+                // {
+                //     scale: interpolate(
+                //         opacity.value,
+                //         [0.5, 1],
+                //         [0.5, 1.2]
+                //     )
+                // }
+                // { translateX: 0 },
+                // { translateY: 22 }
+                { rotate: `${rotate.value}deg` }
+            ]
+        }
+    })
+
+    // useEffect(() => {
+    //     rotate.value = withSpring(rotate.value + 50)
+    // }, [rotate.value.toString])
+
+
+
+
+
     useEffect(() => {
         //* withTiming
         // opacity.value = withTiming(1, {
@@ -68,12 +99,23 @@ export const WelcomeScreen = (props: any) => {
         //     true
         // )
 
+        // rotate.value = withRepeat(
+        //     withSpring(rotate.value + 180),
+        //     -1,
+        //     true
+        // )
+        // rotate.value = withSpring(rotate.value + 50)
+
+        // setInterval(() => {
+        //     rotate.value = withSpring(rotate.value + 50)
+        // }, 2000)
+
         //* withSequence
-        opacity.value = withSequence(
-            withSpring(1),
-            withSpring(0.5),
-            withSpring(1)
-        )
+        // opacity.value = withSequence(
+        //     withSpring(1),
+        //     withSpring(0.5),
+        //     withSpring(1)
+        // )
     }, [])
 
 
@@ -92,7 +134,7 @@ export const WelcomeScreen = (props: any) => {
                 }}
             >
                 {/* <PanGestureHandler onGestureEvent={gestureHandler}> */}
-                <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+                {/* <Animated.View style={[{ flex: 1 }, animatedStyle]}>
                     <Column alignItems="center" justifyContent="center" style={[style.container,]}>
                         <Text>homePage NS: {t('homePage:welcome')}</Text>
                         <Text>Default NS: {t('ok')}</Text>
@@ -103,7 +145,46 @@ export const WelcomeScreen = (props: any) => {
                             <Text>React Native Starter</Text>
                         </AppButton>
                     </Column>
+                </Animated.View> */}
+
+                <Animated.View
+                    style={mazaStyle}>
+                    <Text>What</Text>
                 </Animated.View>
+
+                <Animated.View style={{
+                    alignItems: 'center',
+                    width: 200,
+                    height: 200, alignSelf: 'center', alignContent: 'center', justifyContent: 'center',
+                    borderRadius: 99,
+                    borderWidth: 10,
+                    borderLeftColor: 'blue',
+
+
+                    // margin: 5,
+                    // // backgroundColor: '#000',
+                    // height: 50,
+                    // width: 50,
+                    // position: 'relative',
+                    // borderWidth: 10,
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
+                    // display: 'flex',
+                    // //    fon
+                    // // borderColor: 'pink',
+                    // borderLeftColor: 'blue',
+                    // borderBottomColor: 'pink',
+                    // // border: rgb(223, 217, 217);
+                    // // border-left-color: rgb(255, 170, 11);
+                    // // border-bottom-color: rgb(255, 170, 11);
+                    // /* padding: 15px; */
+                    // borderRadius: 50
+
+
+                }}>
+                    <Text>2:33</Text>
+                </Animated.View>
+
                 {/* </PanGestureHandler> */}
             </Animated.ScrollView>
         </AppView>
