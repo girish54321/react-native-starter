@@ -3,3 +3,5 @@ apply from: file("../node_modules/@react-native-community/cli-platform-android/n
 include ':app'
 include ':app', ':react-native-code-push'
 project(':react-native-code-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-code-push/android/app')
+include ':openCVLibrary310'
+project(':openCVLibrary310').projectDir = new File(rootProject.projectDir,'../node_modules/@woonivers/react-native-document-scanner/android/openCVLibrary310')
