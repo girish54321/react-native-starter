@@ -1,45 +1,28 @@
-import { getUsers } from '../../Network/index';
-import { AxiosResponse } from 'axios';
-import { UserList } from '../../models/responseType/UserListResponse';
-import { ActionTypes } from 'constants/ActionTypes';
+import UserActionTypes from "./UserActionTypes"
+import { call } from 'Network/services';
+import { handleApiError } from 'Config/ErrorHandleUtils';
+import { Dispatch } from 'redux';
 
-export const setUserData = () => async (dispatch: any, getState: any) => {
-  dispatch({
-    type: ActionTypes.SET_USER_LOADING
-  })
-  getUsers()
-    .then((res: AxiosResponse) => {
-      if (res.status === 200) {
-        let data: UserList[] = [];
-        for (let i = 0; i < res.data.length; i++) {
-          data.push(res.data[i]);
-        }
-        dispatch({
-          type: ActionTypes.SET_USER,
-          payload: data
-        })
-      } else {
-        dispatch({
-          type: ActionTypes.SET_USER_ERROR,
-          payload: `Error :${res.status}`
-        })
-      }
-    })
-    .catch((err) => {
-      console.error("Fetch Example Error: ", err);
-      dispatch({
-        type: ActionTypes.SET_USER_ERROR,
-        payload: `"Fetch Example Error: ${err}`
-      })
-    });
-}
+
+export const getServiceResponse = (queryParam: any): any => async (appDispatch: Dispatch) => {
+  call.getService(queryParam).then((responseAxios: any) => {
+    appDispatch(setUserDataAction(responseAxios.data))
+  }).catch((error: any) => {
+      handleApiError(error, appDispatch);
+  });
+};
+
+const setUserDataAction = (payload:any) =>({
+  type: UserActionTypes.SET_USER,
+  payload
+})
 
 export const setUserListError = (payload: any) => ({
-  type: ActionTypes.SET_USER_ERROR,
+  type: UserActionTypes.SET_USER_ERROR,
   payload
 
 })
 
-export const setHomeLoading = (payload: any) => ({
-  type: ActionTypes.SET_USER_LOADING,
+export const setHomeLoading = () => ({
+  type: UserActionTypes.SET_USER_LOADING,
 })

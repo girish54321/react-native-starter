@@ -52,6 +52,7 @@
     "react-native-localize": "^1.4.0",
     "react-native-paper": "^4.8.1",
     "react-native-reanimated": "^2.7.0",
+    "react-native-restart": "^0.0.24",
     "react-native-safe-area-context": "^0.6.2",
     "react-native-screens": "^2.0.0-alpha.29",
     "react-native-svg": "^11.0.1",
@@ -60,6 +61,7 @@
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
     "redux-persist": "^6.0.0",
+    "reduxsauce": "^1.2.1",
     "tsyringe": "^4.0.1"
   },
   "devDependencies": {
