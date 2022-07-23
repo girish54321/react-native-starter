@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { TextInput, Button, useTheme, } from 'react-native-paper';
-import { loginUser } from '../../redux/authStore/action';
+import { userLoginAction } from '../../redux/authStore/action';
 import { Colors } from 'Config/Colors';
 import SizedBox from '@components/SizedBox';
 const LoginScreen = () => {
@@ -28,11 +28,10 @@ const LoginScreen = () => {
   const saveUserLogin = () => {
     if (userData.isValidEmail && userData.isValidPassword) {
       let data = {
-        userLoggedIn: true,
-        userName: userData.email,
-        email: userData.email,
+        email: "eve.holt@reqres.in",
+        password: "cityslicka"
       };
-      authDispatch(loginUser(data));
+      authDispatch(userLoginAction(data))
     } else {
 
     }
@@ -82,10 +81,9 @@ const LoginScreen = () => {
           style={{ justifyContent: 'center', alignContent: 'center', alignItems: 'center', flex: 1 }}>
           <Text >Running {data.BUILD_ENV}</Text>
           <View style={{ marginTop: 8 }} />
-          <Text >PROD ONLY Your Base URL is {data.BASE_URL}</Text>
+          <Text >Your Base URL is {data.BASE_URL}</Text>
         </TouchableOpacity>
         <TextInput
-          textAlign=""
           style={{ backgroundColor: paperTheme.colors.background }}
           label="Email"
           autoCapitalize="none"
@@ -100,7 +98,6 @@ const LoginScreen = () => {
           }
         />
         <TextInput
-          textAlign=""
           style={{ backgroundColor: paperTheme.colors.background }}
           secureTextEntry={userData.secureTextEntry}
           label="Password"

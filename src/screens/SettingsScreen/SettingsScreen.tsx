@@ -7,12 +7,12 @@ import { List, Switch } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux'
 import { logOutUser } from 'redux/authStore/action'
 import { changeTheme } from '../../redux/themeStore/action'
-import { darkThemeType } from '../../redux/themeStore/reducers'
+import { DARK_THEME_TYPE } from '../../redux/themeStore/reducers'
 
 
 const SettingsScreen = () => {
   const appDispatch = useDispatch();
-  const data: darkThemeType = useSelector((state: any) => state.themeReducer);
+  const data: DARK_THEME_TYPE = useSelector((state: any) => state.themeReducer);
   const { t } = useTranslation();
   const authDispatch = useDispatch();
   const toggleSwitch = (value: boolean) => {

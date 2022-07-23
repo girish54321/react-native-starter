@@ -96,11 +96,11 @@ export const Navigation: FC = () => {
                 {/* 
                     //* react-native-reanimated Example in HomeScreen
                 */}
-                <Stack.Screen name={Route.WELCOME} component={WelcomeScreen} />
+                {/* <Stack.Screen name={Route.WELCOME} component={WelcomeScreen} /> */}
                 {/* 
                     //* react-native-reanimated with in scrollable header
                 */}
-                {/* <Stack.Screen name={Route.WELCOME} component={HomeTabs} /> */}
+                <Stack.Screen name={Route.WELCOME} component={HomeTabs} />
             </Stack.Navigator>
         )
     }

@@ -175,21 +175,21 @@ android {
 	productFlavors {
         dev {
             resValue "string", "app_name", "Starter DEV"
-            resValue "string", "base_url", "www.dev.com"
+            resValue "string", "base_url", "https://reqres.in/api/"
             resValue "string", "BUILD_ENV", "DEV"
             resValue "string", "CodePushDeploymentKey", "jLOrVrHK1JdsyoKMG5msgdgf20ApBkgWhk1ii"
             applicationIdSuffix ".dev"
         }
         staging {
             resValue "string", "app_name", "Starter staging"
-            resValue "string", "base_url", "www.staging.com"
+            resValue "string", "base_url", "https://reqres.in/api/"
             resValue "string", "BUILD_ENV", "STAGING"
             resValue "string", "CodePushDeploymentKey", "Hdb4t1CJ7wEMLIy_cujCBq56vGait646Y6hvL"
             applicationIdSuffix ".staging"
         }
         prod {
             resValue "string", "app_name", "Starter"
-            resValue "string", "base_url", "www.prod.com"
+            resValue "string", "base_url", "https://reqres.in/api/"
             resValue "string", "BUILD_ENV", "PROD"
             resValue "string", "CodePushDeploymentKey", "K9YDp0RRMLXCpVbYCvs7hAcLb4nHLJUwtvEyq"
             applicationIdSuffix ".prod"

@@ -19,7 +19,9 @@ export interface Company {
 
 export interface UserList {
     id: number;
-    name: string;
+    first_name: string;
+    avatar:string;
+    last_name:string,
     username: string;
     email: string;
     address: Address;
