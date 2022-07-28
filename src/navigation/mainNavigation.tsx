@@ -144,8 +144,8 @@ export const Navigation: FC = () => {
                                         : 'home-outline';
                                 } else if (route.name === Route.USERSCREEN) {
                                     iconName = focused ? 'person' : 'person-outline';
-                                } else if (route.name === "Settings") {
-                                    iconName = focused ? 'settings' : 'settings-outline';
+                                } else if (route.name === Route.SETTINGS) {
+                                    iconName = focused ? 'ios-settings' : 'settings-outline';
                                 }
                                 return <Ionicons name={iconName} size={size} color={color} />;
                             },
@@ -157,7 +157,7 @@ export const Navigation: FC = () => {
                     >
                         <Tab.Screen name={Route.APPSTACK} component={HomeStack} options={{ title: t('home') }} />
                         <Tab.Screen name={Route.USERSCREEN} component={UsersListStack} options={{ title: t('users') }} />
-                        <Tab.Screen name={"Settings"} component={SettingScreenStack} options={{ title: t('settings') }} />
+                        <Tab.Screen name={Route.SETTINGS} component={SettingScreenStack} options={{ title: t('settings') }} />
                     </Tab.Navigator>
                 ) : (
                     <AuthStackScreens />
