@@ -3,20 +3,20 @@ import { StyleSheet, } from "react-native";
 import { NavigationScreen } from "../../navigation/NavigationTypings";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
-import { userListState } from "../../redux/UserListStore/userListReducer";
-import { setUserData } from "../../redux/UserListStore/action";
+import { getServiceResponse, setUserData } from "../../redux/UserListStore/action";
 import { UserList } from "../../models/responseType/UserListResponse";
 import { ListItem } from "@components/ListItem/ListItem";
 import { AppView, } from "@components/Flex/Flex";
 import { Route } from "constants/Route";
+import { USER_LIST_STATE_TYPE } from "redux/UserListStore/userListReducer";
 
 
 export const UsersScreen: NavigationScreen<Route.WELCOME> = (props: any) => {
     const appDispatch = useDispatch();
-    const data: userListState = useSelector((state: any) => state.userListReducer);
+    const data: USER_LIST_STATE_TYPE = useSelector((state: any) => state.userListReducer);
 
     useEffect(() => {
-        appDispatch(setUserData())
+        appDispatch(getServiceResponse({}))
     }, [])
 
     return (
@@ -24,9 +24,10 @@ export const UsersScreen: NavigationScreen<Route.WELCOME> = (props: any) => {
             <ScrollView style={style.scrollView}>
                 {data.users.map((value: UserList, index: number) => {
                     return (
-                        <ListItem name={value.name} email={value.email}
+                        <ListItem name={`${value.first_name} ${value.last_name}`} email={value.email}
                             key={String(index)}
-                            image={"https://www.w3schools.com/w3images/avatar2.png"} />
+                            image={value.avatar}
+                            style={{}} />
                     )
                 })}
             </ScrollView>

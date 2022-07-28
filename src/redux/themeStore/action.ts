@@ -1,17 +1,17 @@
 import AsyncStorage from '@react-native-community/async-storage'
-import { ActionTypes } from 'constants/ActionTypes';
+import ThemActionType from './themActionType'
 
 export const checkTheme = () => async (dispatch: any, getState: any) => {
-  AsyncStorage.getItem(ActionTypes.CHECK_THEME).then((data) => {
+  AsyncStorage.getItem(ThemActionType.CHECK_THEME).then((data) => {
     if (data) {
       const jsonValue = JSON.parse(data);
       dispatch({
-        type: ActionTypes.CHECK_THEME,
+        type: ThemActionType.CHECK_THEME,
         payload: jsonValue.isDarkTheme
       })
     } else {
       dispatch({
-        type: ActionTypes.CHECK_THEME,
+        type: ThemActionType.CHECK_THEME,
         payload: false
       })
     }
@@ -19,7 +19,7 @@ export const checkTheme = () => async (dispatch: any, getState: any) => {
 }
 
 export const changeTheme = (payload: any) => ({
-  type: ActionTypes.CHNAGE_THEME,
+  type: ThemActionType.CHNAGE_THEME,
   payload,
 });
 

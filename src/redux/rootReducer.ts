@@ -1,6 +1,6 @@
-import { userListReducer } from './UserListStore/userListReducer'
-import { themeReducer } from './themeStore/reducers'
-import { authReducer } from './authStore/authReducers'
+import userListReducer from './UserListStore/userListReducer'
+import themeReducer from './themeStore/reducers'
+import  authReducer from './authStore/authReducers'
 import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers({

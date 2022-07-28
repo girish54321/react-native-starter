@@ -1,14 +1,31 @@
-import { ActionTypes } from '../../constants/ActionTypes';
+import { handleApiError } from 'Config/ErrorHandleUtils';
+import { call } from 'Network/services';
+import { Dispatch } from 'redux';
+import AuthType from './authActionType';
 
 export const loginUser = (payload: any) => ({
-  type: ActionTypes.LOGIN,
+  type: AuthType.LOGIN,
   payload,
 });
 
 export const logOutUser = () => ({
-  type: ActionTypes.LOGOUT,
+  type: AuthType.LOGOUT,
 });
 export const checkUserLogin = (payload: any) => ({
-  type: ActionTypes.CHECK_LOGIN,
+  type: AuthType.CHECK_LOGIN,
   payload,
 });
+
+
+export const userLoginAction = (queryParam: any): any => async (appDispatch: Dispatch) => {
+  call.userLoginApi(queryParam).then((responseAxios: any) => {
+    let data ={
+      ...queryParam,
+      userLoggedIn: true,
+      token: responseAxios.token
+    }
+    appDispatch(loginUser(data))
+  }).catch((error: any) => {
+      handleApiError(error, appDispatch);
+  });
+};
