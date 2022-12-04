@@ -5,8 +5,8 @@ import { List, Avatar, Divider } from 'react-native-paper';
 interface listItemProps {
     name: string,
     email: string
-    style: any,
-    image: string | null
+    style?: any,
+    image: string
 }
 
 export const ListItem = (props: listItemProps) => {
