@@ -22,6 +22,8 @@ const LoginScreen = () => {
     isValidPassword: false,
   });
   const data = NativeModules.RNConfigModule;
+  console.log("NativeModules", NativeModules);
+
   console.log("data", data); //* Get Data form Native Code
 
   const authDispatch = useDispatch();

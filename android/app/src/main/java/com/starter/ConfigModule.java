@@ -1,12 +1,8 @@
 package com.starter;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import java.util.Map;
@@ -26,6 +22,11 @@ public class ConfigModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "RNConfigModule";
+    }
+
+    @ReactMethod
+    public void iAmNewFun(){
+
     }
 
     @Nullable

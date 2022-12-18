@@ -7,7 +7,6 @@ import '../../localization';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { AppView } from '@components/Flex/Flex';
-import { useEffect, useState } from 'react';
 import useFetch from '../../Network/useFetch';
 const Tab = createMaterialTopTabNavigator();
 
@@ -21,7 +20,7 @@ export const HomeTabs = () => {
         scrollY.value = event.contentOffset.y;
     })
 
-    const [data] = useFetch("https://jsonplaceholder.typicode.com/todos");
+    const [data] = useFetch("https://jsonplaceholder.typicode.com/users");
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -60,13 +59,13 @@ export const HomeTabs = () => {
     function HomeScreen() {
         return (
             <View style={{ flex: 1, }}>
-                <Animated.FlatList data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1,]}
+                <Animated.FlatList data={data?.length ? [...data, ...data] : []}
                     onScroll={scrollHandler}
                     scrollEventThrottle={18}
                     renderItem={(item: any, index: number) => {
                         return <ListItem
-                            name={'Girish'}
-                            email={'name@gmail.com'}
+                            name={item.item.name}
+                            email={item.item.email}
                             image={`https://randomuser.me/api/portraits/men/${item.index}.jpg`}
                         />
                     }} />
@@ -76,7 +75,7 @@ export const HomeTabs = () => {
 
     return (
         <AppView style={{ flex: 1 }}>
-            {/* <Animated.View style={animatedStyle} >
+            <Animated.View style={animatedStyle} >
                 <View style={{ flex: 1, }}>
                     <View style={{ padding: 8 }}>
                         <Card>
@@ -92,17 +91,7 @@ export const HomeTabs = () => {
             <Tab.Navigator>
                 <Tab.Screen name="Home" component={HomeScreen} />
                 <Tab.Screen name="Settings" component={HomeScreen} />
-            </Tab.Navigator> */}
-            <FlatList
-                data={data}
-                renderItem={(item: any, index: number) => {
-                    return <ListItem
-                        name={item.item.title}
-                        email={'name@gmail.com'}
-                        image={`https://randomuser.me/api/portraits/men/${item.index}.jpg`}
-                    />
-                }} />
+            </Tab.Navigator>
         </AppView>
-
     );
 }
