@@ -1,34 +1,18 @@
 //
-//  RCTCalendarModule.m
+//  RNConfigModule.m
 //  Starter
 //
-//  Created by Girish Parate on 20/11/21.
-//  Copyright © 2021 Facebook. All rights reserved.
+//  Created by neosoft on 06/01/23.
+//  Copyright © 2023 Facebook. All rights reserved.
 //
 
-#import <React/RCTLog.h>
-#import "RNConfigModule.h"
+#import <Foundation/Foundation.h>
 
-@implementation RNConfigModule
+#import <React/RCTBridgeModule.h>
 
-// To export a module named ReactOneCustomMethod
-RCT_EXPORT_MODULE();
+@interface RCT_EXTERN_MODULE(RNConfigModule,NSObject);
 
-RCT_EXPORT_METHOD(getPhoneID:(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBlock)reject)
-{
-//  NSUUID *deviceID = [[UIDevice currentDevice] identifierForVendor];
-  NSString *deviceName = [[UIDevice currentDevice] name];
-  resolve(deviceName);
-}
+//RCT_EXTERN_METHOD(getBuildInfo:(RCTResponseSenderBlock)callback)
 
-- (NSDictionary *)constantsToExport
-{
-// return @{ @"DEFAULT_EVENT_NAME": @"New Event" };
-  NSString* buildEnvironment = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"BuildEnvironment"];
-  NSString* buildBaseUrl = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"BaseURL"];
-    return @{
-      @"BUILD_ENV": buildEnvironment,
-      @"BASE_URL": buildBaseUrl
-    };
-}
+RCT_EXTERN_METHOD(getBuildInfo:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 @end
