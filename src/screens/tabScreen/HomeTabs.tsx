@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ListItem } from '@components/ListItem/ListItem';
 import Animated, { useSharedValue, useAnimatedStyle, interpolate, useAnimatedScrollHandler, Extrapolate } from "react-native-reanimated";
@@ -7,6 +7,7 @@ import '../../localization';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { AppView } from '@components/Flex/Flex';
+import useFetch from '../../Network/useFetch';
 const Tab = createMaterialTopTabNavigator();
 
 
@@ -18,6 +19,8 @@ export const HomeTabs = () => {
     const scrollHandler = useAnimatedScrollHandler((event) => {
         scrollY.value = event.contentOffset.y;
     })
+
+    const [data] = useFetch("https://jsonplaceholder.typicode.com/users");
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -56,13 +59,13 @@ export const HomeTabs = () => {
     function HomeScreen() {
         return (
             <View style={{ flex: 1, }}>
-                <Animated.FlatList data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1,]}
+                <Animated.FlatList data={data?.length ? [...data, ...data] : []}
                     onScroll={scrollHandler}
                     scrollEventThrottle={18}
-                    renderItem={(item, index) => {
+                    renderItem={(item: any, index: number) => {
                         return <ListItem
-                            name={'Girish'}
-                            email={'name@gmail.com'}
+                            name={item.item.name}
+                            email={item.item.email}
                             image={`https://randomuser.me/api/portraits/men/${item.index}.jpg`}
                         />
                     }} />
@@ -90,6 +93,5 @@ export const HomeTabs = () => {
                 <Tab.Screen name="Settings" component={HomeScreen} />
             </Tab.Navigator>
         </AppView>
-
     );
 }
