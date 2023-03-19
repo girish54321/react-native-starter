@@ -22,6 +22,8 @@
 		AEE7E427E7CC2A56180A0707 /* libPods-Starter-StarterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDA9F27596F798AA4B93393C /* libPods-Starter-StarterTests.a */; };
 		C13CB79BA292E636270AEDB5 /* libPods-Starter-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F18F6AC286AFABFCF2E88F /* libPods-Starter-tvOSTests.a */; };
 		D35B1202B486339F7A437608 /* libPods-Starter-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BBDC5E076C58198A9FCBE63 /* libPods-Starter-tvOS.a */; };
+		F450636329C5D193001EF968 /* LoadingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F450636229C5D193001EF968 /* LoadingStoryboard.storyboard */; };
+		F450636729C5F3C3001EF968 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F450636629C5F3C3001EF968 /* LoadingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EDA9F27596F798AA4B93393C /* libPods-Starter-StarterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Starter-StarterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EE82F4358D9AD7ACE6487F /* Pods-Starter-StarterTests.debugdev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Starter-StarterTests.debugdev.xcconfig"; path = "Target Support Files/Pods-Starter-StarterTests/Pods-Starter-StarterTests.debugdev.xcconfig"; sourceTree = "<group>"; };
+		F450636229C5D193001EF968 /* LoadingStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingStoryboard.storyboard; sourceTree = "<group>"; };
+		F450636629C5F3C3001EF968 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		FA6B09628B10AE21B5096189 /* Pods-Starter.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Starter.releasedev.xcconfig"; path = "Target Support Files/Pods-Starter/Pods-Starter.releasedev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +160,8 @@
 				9224CFB929681C93002FFA1A /* RNConfigModule.swift */,
 				9224CFBC29681D36002FFA1A /* RNConfigModule.m */,
 				9224CFBE29681F97002FFA1A /* Starter-Bridging-Header.h */,
+				F450636229C5D193001EF968 /* LoadingStoryboard.storyboard */,
+				F450636629C5F3C3001EF968 /* LoadingViewController.swift */,
 			);
 			name = Starter;
 			sourceTree = "<group>";
@@ -384,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				F450636329C5D193001EF968 /* LoadingStoryboard.storyboard in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,6 +684,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				F450636729C5F3C3001EF968 /* LoadingViewController.swift in Sources */,
 				9224CFBA29681C93002FFA1A /* RNConfigModule.swift in Sources */,
 				9224CFBD29681D36002FFA1A /* RNConfigModule.m in Sources */,
 			);

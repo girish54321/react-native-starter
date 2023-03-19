@@ -11,5 +11,21 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, RCTBridgeDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) RCTBridge *bridge;
+
+@end
+@implementation AppDelegate
+
+- (void)goNativeStoryboard {
+
+  UIViewController *vc = [UIStoryboard storyboardWithName:@"LoadingStoryboard" bundle:nil].instantiateInitialViewController;
+
+  [UIView transitionWithView:self.window
+                    duration:0.5
+                     options: UITableViewRowAnimationFade
+                  animations:^{ self.window.rootViewController = vc; }
+                  completion:nil];
+
+}
 
 @end

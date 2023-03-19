@@ -14,5 +14,11 @@
 
 //RCT_EXTERN_METHOD(getBuildInfo:(RCTResponseSenderBlock)callback)
 
+RCT_EXTERN_METHOD(goToNative:())
+
+//RCT_EXPORT_METHOD(goToReactNative) {
+//
+//}
+
 RCT_EXTERN_METHOD(getBuildInfo:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 @end
