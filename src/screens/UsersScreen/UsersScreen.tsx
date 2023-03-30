@@ -3,7 +3,7 @@ import { StyleSheet, } from "react-native";
 import { NavigationScreen } from "../../navigation/NavigationTypings";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
-import { getServiceResponse, setUserData } from "../../redux/UserListStore/action";
+import { getServiceResponse } from "../../redux/UserListStore/action";
 import { UserList } from "../../models/responseType/UserListResponse";
 import { ListItem } from "@components/ListItem/ListItem";
 import { AppView, } from "@components/Flex/Flex";
@@ -16,7 +16,7 @@ export const UsersScreen: NavigationScreen<Route.WELCOME> = (props: any) => {
     const data: USER_LIST_STATE_TYPE = useSelector((state: any) => state.userListReducer);
 
     useEffect(() => {
-        appDispatch(getServiceResponse({}))
+        appDispatch(getServiceResponse({ per_page: 20 }))
     }, [])
 
     return (

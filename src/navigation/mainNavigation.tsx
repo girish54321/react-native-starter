@@ -6,17 +6,19 @@ import React, { FC, useEffect, } from 'react';
 import { HOME_STACK_OPTIONS, USERLIST_STACK_OPTIONS, } from './NavigationTypings';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SettingsScreen from '@screens/SettingsScreen/SettingsScreen';
-import { darkThemeType } from 'redux/themeStore/reducers';
+import { DARK_THEME_TYPE } from 'redux/themeStore/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     NavigationContainer,
     DefaultTheme as NavigationDefaultTheme,
-    DarkTheme as NavigationDarkTheme
+    DarkTheme as NavigationDarkTheme,
+    CommonActions
 } from '@react-navigation/native'
 import {
     Provider as PaperProvider,
-    DefaultTheme as PaperDefaultTheme,
-    DarkTheme as PaperDarkTheme
+    MD3LightTheme as PaperDefaultTheme,
+    MD3DarkTheme as PaperDarkTheme,
+    BottomNavigation
 } from 'react-native-paper'
 import { checkTheme } from '../redux/themeStore/action';
 import { Colors } from '../Config/Colors'
@@ -25,19 +27,19 @@ import { Route } from 'constants/Route';
 import AppStatusBar from '@components/appStatusBar/appStatusBar';
 import AuthStackScreens from './authStack/AuthStackScreens';
 import LoadingView from '@components/loadingView';
-import { authType } from 'redux/authStore/authReducers';
+import { AUTH_TYPE } from 'redux/authStore/authReducers';
 import AsyncStorage from '@react-native-community/async-storage';
 import { checkUserLogin } from 'redux/authStore/action';
 import { setTopLevelNavigator } from './NavigationService';
-import { HomeTabs, TabViewApp } from '@screens/tabScreen/HomeTabs';
+import { CustomNavigationBar } from '@components/appAppBar/AppAppBar';
 
 const Stack = createStackNavigator();
 const SettingStack = createStackNavigator();
 const UserStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 export const Navigation: FC = () => {
-    const data: darkThemeType = useSelector((state: any) => state.themeReducer);
-    const authState: authType = useSelector((state: any) => state.authReducer);
+    const data: DARK_THEME_TYPE = useSelector((state: any) => state.themeReducer);
+    const authState: AUTH_TYPE = useSelector((state: any) => state.authReducer);
     const appDispatch = useDispatch();
     const authDispatch = useDispatch();
     const { t, i18n } = useTranslation();
@@ -92,22 +94,32 @@ export const Navigation: FC = () => {
 
     const HomeStack = () => {
         return (
-            <Stack.Navigator screenOptions={{ ...HOME_STACK_OPTIONS, title: t('starterApp') }}>
+            <Stack.Navigator
+                screenOptions={{
+                    header: (props) => <CustomNavigationBar {...props} title={t('starterApp')} />,
+                }}
+            // screenOptions={{ ...HOME_STACK_OPTIONS, title: t('starterApp') }}
+            >
                 {/* 
                     //* react-native-reanimated Example in HomeScreen
                 */}
-                {/* <Stack.Screen name={Route.WELCOME} component={WelcomeScreen} /> */}
+                <Stack.Screen name={Route.WELCOME} component={WelcomeScreen} />
                 {/* 
                     //* react-native-reanimated with in scrollable header
                 */}
-                <Stack.Screen name={Route.WELCOME} component={HomeTabs} />
+                {/* <Stack.Screen name={Route.WELCOME} component={HomeTabs} /> */}
             </Stack.Navigator>
         )
     }
 
     const UsersListStack = () => {
         return (
-            <UserStack.Navigator screenOptions={{ ...USERLIST_STACK_OPTIONS, title: t('users') }}>
+            <UserStack.Navigator
+                // screenOptions={{ ...USERLIST_STACK_OPTIONS, title: t('users') }}
+                screenOptions={{
+                    header: (props) => <CustomNavigationBar {...props} title={t('users')} />,
+                }}
+            >
                 <UserStack.Screen name={Route.USERSCREEN} component={UsersScreen} />
             </UserStack.Navigator>
         )
@@ -115,7 +127,12 @@ export const Navigation: FC = () => {
 
     const SettingScreenStack = () => {
         return (
-            <SettingStack.Navigator screenOptions={{ ...USERLIST_STACK_OPTIONS, title: t('settings') }}>
+            <SettingStack.Navigator
+                // screenOptions={{ ...USERLIST_STACK_OPTIONS, title: t('settings') }}
+                screenOptions={{
+                    header: (props) => <CustomNavigationBar {...props} title={t('settings')} />,
+                }}
+            >
                 <SettingStack.Screen name={Route.SETTINGS} component={SettingsScreen} />
             </SettingStack.Navigator>
         )
@@ -135,29 +152,70 @@ export const Navigation: FC = () => {
                 theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
                 {authState.userLoggedIn ? (
                     <Tab.Navigator
-                        screenOptions={({ route }) => ({
-                            tabBarIcon: ({ focused, color, size }) => {
-                                let iconName;
-                                if (route.name === Route.APPSTACK) {
-                                    iconName = focused
-                                        ? 'home'
-                                        : 'home-outline';
-                                } else if (route.name === Route.USERSCREEN) {
-                                    iconName = focused ? 'person' : 'person-outline';
-                                } else if (route.name === Route.SETTINGS) {
-                                    iconName = focused ? 'ios-settings' : 'settings-outline';
-                                }
-                                return <Ionicons name={iconName} size={size} color={color} />;
-                            },
-                        })}
-                        tabBarOptions={{
-                            activeTintColor: Colors.primary,
-                            inactiveTintColor: 'gray',
-                        }}
+                        tabBar={({ navigation, state, descriptors, insets }) => (
+                            <BottomNavigation.Bar
+                                navigationState={state}
+                                safeAreaInsets={insets}
+                                onTabPress={({ route, preventDefault }) => {
+                                    const event = navigation.emit({
+                                        type: 'tabPress',
+                                        target: route.key,
+                                        canPreventDefault: true,
+                                    });
+                                    if (event.defaultPrevented) {
+                                        preventDefault();
+                                    } else {
+                                        navigation.dispatch({
+                                            ...CommonActions.navigate(route.name, route.params),
+                                            target: state.key,
+                                        });
+                                    }
+                                }}
+                                renderIcon={({ route, focused, color }) => {
+                                    const { options } = descriptors[route.key];
+                                    if (options.tabBarIcon) {
+                                        return options.tabBarIcon({ focused, color, size: 24 });
+                                    }
+                                    return null;
+                                }}
+                                getLabelText={({ route }) => {
+                                    const { options } = descriptors[route.key];
+                                    const label =
+                                        options.tabBarLabel !== undefined
+                                            ? options.tabBarLabel
+                                            : options.title !== undefined
+                                                ? options.title
+                                                : route.title;
+
+                                    return label;
+                                }}
+                            />
+                        )}
                     >
-                        <Tab.Screen name={Route.APPSTACK} component={HomeStack} options={{ title: t('home') }} />
-                        <Tab.Screen name={Route.USERSCREEN} component={UsersListStack} options={{ title: t('users') }} />
-                        <Tab.Screen name={Route.SETTINGS} component={SettingScreenStack} options={{ title: t('settings') }} />
+                        <Tab.Screen name={Route.APPSTACK} component={HomeStack}
+                            options={{
+                                tabBarLabel: t('home'),
+                                tabBarIcon: ({ color, size }) => {
+                                    return <Ionicons name="home" size={size} color={color} />;
+                                },
+                            }}
+                        />
+                        <Tab.Screen name={Route.USERSCREEN} component={UsersListStack}
+                            options={{
+                                tabBarLabel: t('users'),
+                                tabBarIcon: ({ color, size }) => {
+                                    return <Ionicons name="person" size={size} color={color} />;
+                                },
+                            }}
+                        />
+                        <Tab.Screen name={Route.SETTINGS} component={SettingScreenStack}
+                            options={{
+                                tabBarLabel: t('settings'),
+                                tabBarIcon: ({ color, size }) => {
+                                    return <Ionicons name="ios-settings" size={size} color={color} />;
+                                },
+                            }}
+                        />
                     </Tab.Navigator>
                 ) : (
                     <AuthStackScreens />
