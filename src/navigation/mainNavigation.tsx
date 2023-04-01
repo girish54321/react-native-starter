@@ -71,7 +71,7 @@ export const Navigation: FC = () => {
             accent: Colors.primary,
             primary: Colors.primary,
             card: 'rgb(18, 18, 18)',
-            background: '#333333',
+            background: '#000000',
             text: '#ffffff'
         }
     }

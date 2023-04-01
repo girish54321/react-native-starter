@@ -1,10 +1,7 @@
 import { Alert } from "react-native";
 import RNRestart from 'react-native-restart';
-// import { hideLoader, showAlert } from "../../action/AppActions";
 
 export function handleApiError(error: any, appDispatch: any) {
-    // appDispatch(hideLoader());
-    // isDisplayError(error.message) && appDispatch(showAlert(error.message));
 }
 
 function isDisplayError(message: string) {
