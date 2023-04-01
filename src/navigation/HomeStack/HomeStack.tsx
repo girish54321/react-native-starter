@@ -13,9 +13,9 @@ export const HomeScreenStack = () => {
     return (
         <HomeStack.Navigator
             screenOptions={{
-                header: (props) => <CustomNavigationBar {...props} title={t('starterApp')} />,
+                title: t('starterApp'),
+                header: (props) => <CustomNavigationBar  {...props} />,
             }}
-        // screenOptions={{ ...HOME_STACK_OPTIONS, title: t('starterApp') }}
         >
             {/* 
                 //* react-native-reanimated Example in HomeScreen

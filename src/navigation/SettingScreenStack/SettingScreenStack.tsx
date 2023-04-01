@@ -11,7 +11,8 @@ export const SettingScreenStack = () => {
     return (
         <SettingStack.Navigator
             screenOptions={{
-                header: (props) => <CustomNavigationBar {...props} title={t('settings')} />,
+                title: t('settings'),
+                header: (props) => <CustomNavigationBar  {...props} />,
             }}
         >
             <SettingStack.Screen name={Route.SETTINGS} component={SettingsScreen} />

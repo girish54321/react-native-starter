@@ -16,6 +16,9 @@ export const AppBottomTab = () => {
 
     return (
         <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+            }}
             tabBar={({ navigation, state, descriptors, insets }) => (
                 <BottomNavigation.Bar
                     navigationState={state}

@@ -10,6 +10,7 @@ export const SelectedUserScreen = (props: any) => {
     const data: UserList = props?.route?.params?.data
 
     useEffect(() => {
+        props.navigation.setOptions({ title: `${data.first_name} ${data.last_name}` })
     }, [])
 
     return (

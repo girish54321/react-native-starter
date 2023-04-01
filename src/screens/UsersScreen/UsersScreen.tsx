@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { FlatList, GestureResponderEvent, StyleSheet, } from "react-native";
-import { NavigationScreen } from "../../navigation/NavigationTypings";
+import { FlatList, GestureResponderEvent, } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getServiceResponse } from "../../redux/UserListStore/action";
 import { ListItem } from "@components/ListItem/ListItem";
@@ -9,7 +8,7 @@ import { Route } from "constants/Route";
 import { USER_LIST_STATE_TYPE } from "redux/UserListStore/userListReducer";
 import { navigate } from "@navigation/NavigationService";
 
-export const UsersScreen: NavigationScreen<Route.WELCOME> = (_props: any) => {
+export const UsersScreen = (_props: any) => {
     const appDispatch = useDispatch();
     const data: USER_LIST_STATE_TYPE = useSelector((state: any) => state.userListReducer);
 

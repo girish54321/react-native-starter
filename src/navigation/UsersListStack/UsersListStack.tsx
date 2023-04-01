@@ -13,7 +13,8 @@ export const UsersListStack = () => {
     return (
         <UserStack.Navigator
             screenOptions={{
-                header: (props) => <CustomNavigationBar {...props} title={t('users')} />,
+                title: t('users'),
+                header: (props) => <CustomNavigationBar {...props} />,
             }}
         >
             <UserStack.Screen name={Route.USERSCREEN} component={UsersScreen} />
