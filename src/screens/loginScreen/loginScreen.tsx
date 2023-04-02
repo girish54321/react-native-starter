@@ -5,15 +5,14 @@ import {
   NativeModules,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { TextInput, Button, useTheme, } from 'react-native-paper';
 import { userLoginAction } from '../../redux/authStore/action';
 import { Colors } from 'Config/Colors';
 import SizedBox from '@components/SizedBox';
 const LoginScreen = () => {
-  const paperTheme = useTheme();
   const [userData, setuserData] = useState({
     email: '',
     password: '',
@@ -85,41 +84,22 @@ const LoginScreen = () => {
           <Text >Your Base URL is {data.BASE_URL}</Text>
         </TouchableOpacity>
         <TextInput
-          style={{ backgroundColor: paperTheme.colors.background }}
-          label="Email"
           autoCapitalize="none"
           value={userData.email}
           placeholder="Email"
           onChangeText={textEmailChange}
-          right={
-            <TextInput.Icon
-              name={'email'}
-              color={userData.isValidEmail ? Colors.primary : 'gray'}
-            />
-          }
         />
         <TextInput
-          style={{ backgroundColor: paperTheme.colors.background }}
           secureTextEntry={userData.secureTextEntry}
-          label="Password"
           placeholder="Password"
           autoCapitalize="none"
           value={userData.password}
           onChangeText={textPasswordChange}
-          right={
-            <TextInput.Icon
-              name={'key'}
-              color={userData.isValidPassword ? Colors.primary : 'gray'}
-            />
-          }
         />
-        <SizedBox size={16} />
-        <Button
-          mode="contained"
-          contentStyle={{ height: 50 }}
+        <TouchableOpacity
           onPress={() => saveUserLogin()}>
-          Login
-        </Button>
+          <Text>Login</Text>
+        </TouchableOpacity>
       </View>
       <View style={{ flex: 1 }}></View>
     </KeyboardAvoidingView>

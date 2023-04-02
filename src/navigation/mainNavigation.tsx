@@ -6,11 +6,6 @@ import {
     DefaultTheme as NavigationDefaultTheme,
     DarkTheme as NavigationDarkTheme
 } from '@react-navigation/native'
-import {
-    Provider as PaperProvider,
-    MD3LightTheme as PaperDefaultTheme,
-    MD3DarkTheme as PaperDarkTheme
-} from 'react-native-paper'
 import { checkTheme } from '../redux/themeStore/action';
 import { Colors } from '../Config/Colors'
 import AppStatusBar from '@components/appStatusBar/appStatusBar';
@@ -49,10 +44,8 @@ export const Navigation: FC = () => {
     };
 
     let CustomDefaultTheme = {
-        ...PaperDefaultTheme,
         ...NavigationDefaultTheme,
         colors: {
-            ...PaperDefaultTheme.colors,
             ...NavigationDefaultTheme.colors,
             accent: Colors.primary,
             primary: Colors.primary,
@@ -63,10 +56,9 @@ export const Navigation: FC = () => {
     }
 
     let CustomDarkTheme = {
-        ...PaperDarkTheme,
         ...NavigationDarkTheme,
+        dark: true,
         colors: {
-            ...PaperDarkTheme.colors,
             ...NavigationDarkTheme.colors,
             accent: Colors.primary,
             primary: Colors.primary,
@@ -81,19 +73,16 @@ export const Navigation: FC = () => {
     }
 
     return (
-        <PaperProvider theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
-            <AppStatusBar isDarkTheme={data.isDarkTheme} />
-            <NavigationContainer
-                ref={(navigatorRef: any) => {
-                    setTopLevelNavigator(navigatorRef);
-                }}
-                theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
-                {authState.userLoggedIn ? (
-                    <AppBottomTab />
-                ) : (
-                    <AuthStackScreens />
-                )}
-            </NavigationContainer>
-        </PaperProvider>
+        <NavigationContainer
+            ref={(navigatorRef: any) => {
+                setTopLevelNavigator(navigatorRef);
+            }}
+            theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
+            {authState.userLoggedIn ? (
+                <AppBottomTab />
+            ) : (
+                <AuthStackScreens />
+            )}
+        </NavigationContainer>
     );
 }

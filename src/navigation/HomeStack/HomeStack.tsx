@@ -1,4 +1,4 @@
-import { CustomNavigationBar } from "@components/appAppBar/AppAppBar";
+// import { CustomNavigationBar } from "@components/appAppBar/AppAppBar";
 import { createStackNavigator } from "@react-navigation/stack";
 import { WelcomeScreen } from "@screens/welcome/WelcomeScreen";
 import { Route } from "constants/Route";
@@ -14,7 +14,7 @@ export const HomeScreenStack = () => {
         <HomeStack.Navigator
             screenOptions={{
                 title: t('starterApp'),
-                header: (props) => <CustomNavigationBar  {...props} />,
+                // header: (props) => <CustomNavigationBar  {...props} />,
             }}
         >
             {/* 

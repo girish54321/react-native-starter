@@ -1,4 +1,3 @@
-import { CustomNavigationBar } from "@components/appAppBar/AppAppBar";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SelectedUserScreen } from "@screens/UsersScreen/SelectedUser";
 import { UsersScreen } from "@screens/UsersScreen/UsersScreen";
@@ -14,7 +13,6 @@ export const UsersListStack = () => {
         <UserStack.Navigator
             screenOptions={{
                 title: t('users'),
-                header: (props) => <CustomNavigationBar {...props} />,
             }}
         >
             <UserStack.Screen name={Route.USERSCREEN} component={UsersScreen} />

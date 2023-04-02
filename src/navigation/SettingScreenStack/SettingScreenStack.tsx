@@ -1,4 +1,4 @@
-import { CustomNavigationBar } from "@components/appAppBar/AppAppBar";
+// import { CustomNavigationBar } from "@components/appAppBar/AppAppBar";
 import { createStackNavigator } from "@react-navigation/stack";
 import SettingsScreen from "@screens/SettingsScreen/SettingsScreen";
 import { Route } from "constants/Route";
@@ -12,7 +12,7 @@ export const SettingScreenStack = () => {
         <SettingStack.Navigator
             screenOptions={{
                 title: t('settings'),
-                header: (props) => <CustomNavigationBar  {...props} />,
+                // header: (props) => <CustomNavigationBar  {...props} />,
             }}
         >
             <SettingStack.Screen name={Route.SETTINGS} component={SettingsScreen} />

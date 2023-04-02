@@ -3,9 +3,9 @@ import {
   StyleSheet,
   View,
   Dimensions,
+  Text,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { List } from 'react-native-paper';
 import { Colors } from 'Config/Colors';
 const { width } = Dimensions.get('window');
 const LANGS = [
@@ -22,7 +22,7 @@ const LanguageSelector = () => {
 
   return (
     <View style={styles.container}>
-      <List.Accordion
+      {/* <List.Accordion
         title={t('languageSelector:selectLng')}
         expanded={expanded}
         onPress={handlePress}
@@ -39,7 +39,8 @@ const LanguageSelector = () => {
             />
           );
         })}
-      </List.Accordion>
+      </List.Accordion> */}
+      <Text>Lag</Text>
     </View>
   );
 };

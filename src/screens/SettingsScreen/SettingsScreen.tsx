@@ -2,13 +2,13 @@ import { AppView } from '@components/Flex/Flex'
 import LanguageSelector from '@components/LanguageSelector'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Alert, View } from 'react-native'
-import { List, Switch } from 'react-native-paper'
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { logOutUser } from 'redux/authStore/action'
 import { changeTheme } from '../../redux/themeStore/action'
 import { DARK_THEME_TYPE } from '../../redux/themeStore/reducers'
-
+import ImagePicker from 'react-native-image-crop-picker';
+import { useTheme } from '@react-navigation/native'
 
 const SettingsScreen = () => {
   const appDispatch = useDispatch();
@@ -18,7 +18,7 @@ const SettingsScreen = () => {
   const toggleSwitch = (value: boolean) => {
     appDispatch(changeTheme(value));
   }
-
+  const colors = useTheme().colors;
   const removeUser = () => {
     Alert.alert(
       'Sing Out?',
@@ -45,7 +45,13 @@ const SettingsScreen = () => {
           flex: 1
         }}>
         <LanguageSelector />
-        <List.Item
+        <TouchableOpacity style={styles.button} onPress={() => {
+          toggleSwitch(!data.isDarkTheme)
+        }}>
+          <View style={[styles.switch, true && styles.switchOn]} />
+        </TouchableOpacity>
+        <Text style={[styles.label, { color: colors.text }]}>{data.isDarkTheme ? 'ON' : 'OFF'}</Text>
+        {/* <List.Item
           onPress={() => {
             appDispatch(changeTheme(!data.isDarkTheme))
           }}
@@ -61,10 +67,37 @@ const SettingsScreen = () => {
           title={t('logOut')}
           description={t('singOut')}
           left={(props) => <List.Icon {...props} icon="exit-to-app" />}
-        />
+        /> */}
       </View>
     </AppView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  button: {
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: '#ccc',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    marginRight: 8,
+  },
+  switch: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+  },
+  switchOn: {
+    backgroundColor: '#0080ff',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
 
 export default SettingsScreen
