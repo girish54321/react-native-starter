@@ -51,7 +51,6 @@
     "react-native-code-push": "^7.0.4",
     "react-native-encrypted-storage": "^2.1.0",
     "react-native-gesture-handler": "^1.5.3",
-    "react-native-image-crop-picker": "^0.39.0",
     "react-native-localize": "^1.4.0",
     "react-native-reanimated": "^2.13.0",
     "react-native-restart": "^0.0.24",

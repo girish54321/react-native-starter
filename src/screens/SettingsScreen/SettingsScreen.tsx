@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logOutUser } from 'redux/authStore/action'
 import { changeTheme } from '../../redux/themeStore/action'
 import { DARK_THEME_TYPE } from '../../redux/themeStore/reducers'
-import ImagePicker from 'react-native-image-crop-picker';
 import { useTheme } from '@react-navigation/native'
+import { Colors } from 'Config/Colors'
 
 const SettingsScreen = () => {
   const appDispatch = useDispatch();
@@ -37,37 +37,17 @@ const SettingsScreen = () => {
       { cancelable: false },
     );
   };
-
   return (
     <AppView>
-      <View
-        style={{
-          flex: 1
-        }}>
-        <LanguageSelector />
-        <TouchableOpacity style={styles.button} onPress={() => {
-          toggleSwitch(!data.isDarkTheme)
-        }}>
-          <View style={[styles.switch, true && styles.switchOn]} />
+      <View style={styles.container}>
+        <Text style={styles.title}>Settings</Text>
+        <View style={styles.row}>
+          <Text style={[styles.label, { color: colors.text }]} onPress={() => toggleSwitch(!data.isDarkTheme)}>Dark mode</Text>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={removeUser}>
+          <Text style={styles.buttonText}>Sign out</Text>
         </TouchableOpacity>
-        <Text style={[styles.label, { color: colors.text }]}>{data.isDarkTheme ? 'ON' : 'OFF'}</Text>
-        {/* <List.Item
-          onPress={() => {
-            appDispatch(changeTheme(!data.isDarkTheme))
-          }}
-          title={t('darkLightMode')}
-          description={t('changeAppTheme')}
-          left={props => <List.Icon {...props} icon="theme-light-dark" />}
-          right={() => (
-            <Switch value={data.isDarkTheme} onValueChange={toggleSwitch} />
-          )}
-        />
-        <List.Item
-          onPress={removeUser}
-          title={t('logOut')}
-          description={t('singOut')}
-          left={(props) => <List.Icon {...props} icon="exit-to-app" />}
-        /> */}
+        <LanguageSelector />
       </View>
     </AppView>
   )
@@ -75,28 +55,34 @@ const SettingsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  row: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  button: {
-    borderWidth: 1,
-    borderRadius: 12,
-    borderColor: '#ccc',
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    marginRight: 8,
-  },
-  switch: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-  },
-  switchOn: {
-    backgroundColor: '#0080ff',
+    marginBottom: 20,
   },
   label: {
     fontSize: 18,
-    fontWeight: 'bold',
+    marginRight: 10,
+  },
+  button: {
+    backgroundColor: Colors.primary,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
+    textAlign: 'center',
   },
 });
 

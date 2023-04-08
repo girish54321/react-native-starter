@@ -2,45 +2,33 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Dimensions,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Colors } from 'Config/Colors';
-const { width } = Dimensions.get('window');
 const LANGS = [
   { lngCode: 'en', label: 'English' },
   { lngCode: 'hi', label: 'हिन्दी' },
 ];
 
 const LanguageSelector = () => {
-  const { t, i18n } = useTranslation();
-  const [expanded, setExpanded] = React.useState(true);
-  const handlePress = () => setExpanded(!expanded);
+  const { i18n } = useTranslation();
   const selectedLngCode = i18n.language;
   const setLng = (lngCode: string) => i18n.changeLanguage(lngCode);
 
   return (
     <View style={styles.container}>
-      {/* <List.Accordion
-        title={t('languageSelector:selectLng')}
-        expanded={expanded}
-        onPress={handlePress}
-        left={props => <List.Icon {...props} icon="translate" style={{ marginLeft: 6 }} />}>
-        {LANGS.map((l) => {
-          const selected = l.lngCode === selectedLngCode;
-          return (
-            <List.Item
-              disabled={selected}
-              key={l.lngCode}
-              onPress={() => setLng(l.lngCode)}
-              title={l.label}
-              right={props => selected ? <List.Icon {...props} color={Colors.primary} icon={"check"} /> : null}
-            />
-          );
-        })}
-      </List.Accordion> */}
-      <Text>Lag</Text>
+      {LANGS.map((l) => {
+        const selected = l.lngCode === selectedLngCode;
+        return (
+          <TouchableOpacity disabled={selected} onPress={() => setLng(l.lngCode)}>
+            <View style={[styles.button, { backgroundColor: selected ? Colors?.gray : Colors.primary }]}>
+              <Text style={styles.buttonText}>Change language ({l.label})</Text>
+            </View>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };
@@ -49,7 +37,6 @@ export default LanguageSelector;
 
 const styles = StyleSheet.create({
   container: {
-    width: width
   },
   titleContainer: {
     alignItems: 'center',
@@ -66,6 +53,17 @@ const styles = StyleSheet.create({
   },
   selectedRow: {
     backgroundColor: 'gray',
+  },
+  button: {
+    backgroundColor: Colors.primary,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
+    textAlign: 'center',
   },
   selectedText: {
     // color: 'rgb(231, 232, 235)',
