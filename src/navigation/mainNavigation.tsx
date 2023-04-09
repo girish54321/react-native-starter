@@ -8,7 +8,6 @@ import {
 } from '@react-navigation/native'
 import { checkTheme } from '../redux/themeStore/action';
 import { Colors } from '../Config/Colors'
-import AppStatusBar from '@components/appStatusBar/appStatusBar';
 import LoadingView from '@components/loadingView';
 import { AUTH_TYPE } from 'redux/authStore/authReducers';
 import AsyncStorage from '@react-native-community/async-storage';
