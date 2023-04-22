@@ -6,12 +6,13 @@ import {
   View,
   Text,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  StyleSheet
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { userLoginAction } from '../../redux/authStore/action';
-import { Colors } from 'Config/Colors';
 import SizedBox from '@components/SizedBox';
+import { AppButton } from '@components/Button/Button';
 const LoginScreen = () => {
   const [userData, setuserData] = useState({
     email: '',
@@ -21,8 +22,6 @@ const LoginScreen = () => {
     isValidPassword: false,
   });
   const data = NativeModules.RNConfigModule;
-
-  console.log("data", data); //* Get Data form Native Code
 
   const authDispatch = useDispatch();
   const saveUserLogin = () => {
@@ -84,22 +83,23 @@ const LoginScreen = () => {
           <Text >Your Base URL is {data.BASE_URL}</Text>
         </TouchableOpacity>
         <TextInput
+          style={styles.input}
           autoCapitalize="none"
           value={userData.email}
           placeholder="Email"
           onChangeText={textEmailChange}
         />
+        <SizedBox size={12} width={0} />
         <TextInput
+          style={styles.input}
           secureTextEntry={userData.secureTextEntry}
           placeholder="Password"
           autoCapitalize="none"
           value={userData.password}
           onChangeText={textPasswordChange}
         />
-        <TouchableOpacity
-          onPress={() => saveUserLogin()}>
-          <Text>Login</Text>
-        </TouchableOpacity>
+        <SizedBox size={12} width={0} />
+        <AppButton children={"Login"} onPress={() => saveUserLogin()} />
       </View>
       <View style={{ flex: 1 }}></View>
     </KeyboardAvoidingView>
@@ -107,3 +107,19 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#F3F3F3',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  input: {
+    height: 48,
+    borderWidth: 1,
+    borderRadius: 10,
+    fontSize: 16,
+    padding: 8
+  },
+});
