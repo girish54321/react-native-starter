@@ -5,15 +5,15 @@ import {
   NativeModules,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput,
+  StyleSheet
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { TextInput, Button, useTheme, } from 'react-native-paper';
 import { userLoginAction } from '../../redux/authStore/action';
-import { Colors } from 'Config/Colors';
 import SizedBox from '@components/SizedBox';
+import { AppButton } from '@components/Button/Button';
 const LoginScreen = () => {
-  const paperTheme = useTheme();
   const [userData, setuserData] = useState({
     email: '',
     password: '',
@@ -22,8 +22,6 @@ const LoginScreen = () => {
     isValidPassword: false,
   });
   const data = NativeModules.RNConfigModule;
-
-  console.log("data", data); //* Get Data form Native Code
 
   const authDispatch = useDispatch();
   const saveUserLogin = () => {
@@ -85,41 +83,23 @@ const LoginScreen = () => {
           <Text >Your Base URL is {data.BASE_URL}</Text>
         </TouchableOpacity>
         <TextInput
-          style={{ backgroundColor: paperTheme.colors.background }}
-          label="Email"
+          style={styles.input}
           autoCapitalize="none"
           value={userData.email}
           placeholder="Email"
           onChangeText={textEmailChange}
-          right={
-            <TextInput.Icon
-              name={'email'}
-              color={userData.isValidEmail ? Colors.primary : 'gray'}
-            />
-          }
         />
+        <SizedBox size={12} width={0} />
         <TextInput
-          style={{ backgroundColor: paperTheme.colors.background }}
+          style={styles.input}
           secureTextEntry={userData.secureTextEntry}
-          label="Password"
           placeholder="Password"
           autoCapitalize="none"
           value={userData.password}
           onChangeText={textPasswordChange}
-          right={
-            <TextInput.Icon
-              name={'key'}
-              color={userData.isValidPassword ? Colors.primary : 'gray'}
-            />
-          }
         />
-        <SizedBox size={16} />
-        <Button
-          mode="contained"
-          contentStyle={{ height: 50 }}
-          onPress={() => saveUserLogin()}>
-          Login
-        </Button>
+        <SizedBox size={12} width={0} />
+        <AppButton children={"Login"} onPress={() => saveUserLogin()} />
       </View>
       <View style={{ flex: 1 }}></View>
     </KeyboardAvoidingView>
@@ -127,3 +107,19 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#F3F3F3',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  input: {
+    height: 48,
+    borderWidth: 1,
+    borderRadius: 10,
+    fontSize: 16,
+    padding: 8
+  },
+});

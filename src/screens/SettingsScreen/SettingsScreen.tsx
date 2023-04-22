@@ -2,13 +2,13 @@ import { AppView } from '@components/Flex/Flex'
 import LanguageSelector from '@components/LanguageSelector'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Alert, View } from 'react-native'
-import { List, Switch } from 'react-native-paper'
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { logOutUser } from 'redux/authStore/action'
 import { changeTheme } from '../../redux/themeStore/action'
 import { DARK_THEME_TYPE } from '../../redux/themeStore/reducers'
-
+import { useTheme } from '@react-navigation/native'
+import { Colors } from 'Config/Colors'
 
 const SettingsScreen = () => {
   const appDispatch = useDispatch();
@@ -18,7 +18,7 @@ const SettingsScreen = () => {
   const toggleSwitch = (value: boolean) => {
     appDispatch(changeTheme(value));
   }
-
+  const colors = useTheme().colors;
   const removeUser = () => {
     Alert.alert(
       'Sing Out?',
@@ -37,34 +37,53 @@ const SettingsScreen = () => {
       { cancelable: false },
     );
   };
-
   return (
     <AppView>
-      <View
-        style={{
-          flex: 1
-        }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Settings</Text>
+        <View style={styles.row}>
+          <Text style={[styles.label, { color: colors.text }]} onPress={() => toggleSwitch(!data.isDarkTheme)}>Dark mode</Text>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={removeUser}>
+          <Text style={styles.buttonText}>Sign out</Text>
+        </TouchableOpacity>
         <LanguageSelector />
-        <List.Item
-          onPress={() => {
-            appDispatch(changeTheme(!data.isDarkTheme))
-          }}
-          title={t('darkLightMode')}
-          description={t('changeAppTheme')}
-          left={props => <List.Icon {...props} icon="theme-light-dark" />}
-          right={() => (
-            <Switch value={data.isDarkTheme} onValueChange={toggleSwitch} />
-          )}
-        />
-        <List.Item
-          onPress={removeUser}
-          title={t('logOut')}
-          description={t('singOut')}
-          left={(props) => <List.Icon {...props} icon="exit-to-app" />}
-        />
       </View>
     </AppView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 18,
+    marginRight: 10,
+  },
+  button: {
+    backgroundColor: Colors.primary,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
+    textAlign: 'center',
+  },
+});
 
 export default SettingsScreen

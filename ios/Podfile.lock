@@ -230,8 +230,12 @@ PODS:
     - React
   - react-native-restart (0.0.24):
     - React-Core
-  - react-native-safe-area-context (0.6.4):
+  - react-native-safe-area-context (4.1.2):
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
     - React
+    - ReactCommon/turbomodule/core
   - React-perflogger (0.68.5)
   - React-RCTActionSheet (0.68.5):
     - React-Core/RCTActionSheetHeaders (= 0.68.5)
@@ -303,6 +307,15 @@ PODS:
     - React
   - RNGestureHandler (1.10.3):
     - React-Core
+  - RNImageCropPicker (0.39.0):
+    - React-Core
+    - React-RCTImage
+    - RNImageCropPicker/QBImagePickerController (= 0.39.0)
+    - TOCropViewController
+  - RNImageCropPicker/QBImagePickerController (0.39.0):
+    - React-Core
+    - React-RCTImage
+    - TOCropViewController
   - RNLocalize (1.4.3):
     - React-Core
   - RNReanimated (2.13.0):
@@ -332,13 +345,14 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (2.18.1):
+  - RNScreens (2.15.2):
     - React-Core
   - RNSVG (11.0.1):
     - React
-  - RNVectorIcons (8.1.0):
+  - RNVectorIcons (9.2.0):
     - React-Core
   - SSZipArchive (2.2.3)
+  - TOCropViewController (2.6.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -381,6 +395,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNLocalize (from `../node_modules/react-native-localize`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -394,6 +409,7 @@ SPEC REPOS:
     - fmt
     - JWT
     - SSZipArchive
+    - TOCropViewController
 
 EXTERNAL SOURCES:
   boost:
@@ -470,6 +486,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNLocalize:
     :path: "../node_modules/react-native-localize"
   RNReanimated:
@@ -508,7 +526,7 @@ SPEC CHECKSUMS:
   React-logger: 98f663b292a60967ebbc6d803ae96c1381183b6d
   react-native-encrypted-storage: aea5735891f45f04e0e222099090cece3de825ea
   react-native-restart: 45c8dca02491980f2958595333cbccd6877cb57e
-  react-native-safe-area-context: 52342d2d80ea8faadd0ffa76d83b6051f20c5329
+  react-native-safe-area-context: 114e9a74df2643012b9d6cc1460b94f3b6a90780
   React-perflogger: 0458a87ea9a7342079e7a31b0d32b3734fb8415f
   React-RCTActionSheet: 22538001ea2926dea001111dd2846c13a0730bc9
   React-RCTAnimation: 732ce66878d4aa151d56a0d142b1105aa12fd313
@@ -524,12 +542,14 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNImageCropPicker: 14fe1c29298fb4018f3186f455c475ab107da332
   RNLocalize: 7c7aeda16c01db7a0918981c14875c0a53be9b79
   RNReanimated: b21b362b4b8ca921932e8b1718e88cf3a36f157e
-  RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
+  RNScreens: 3d682bcaba69a4f8e55543d90818704f34338db1
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
-  RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
+  RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: c4d61225a466f250c35c1ee78d2d0b3d41fe661c
 
 PODFILE CHECKSUM: 7a42b3d1c717dfdfca479dcc387351a58b6f8340

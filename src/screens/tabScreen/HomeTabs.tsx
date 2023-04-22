@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { FlatList, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ListItem } from '@components/ListItem/ListItem';
 import Animated, { useSharedValue, useAnimatedStyle, interpolate, useAnimatedScrollHandler, Extrapolate } from "react-native-reanimated";
 import '../../localization';
-import { Card, Title, Paragraph } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { AppView } from '@components/Flex/Flex';
 import useFetch from '../../Network/useFetch';
@@ -63,11 +62,7 @@ export const HomeTabs = () => {
                     onScroll={scrollHandler}
                     scrollEventThrottle={18}
                     renderItem={(item: any, index: number) => {
-                        return <ListItem
-                            name={item.item.name}
-                            email={item.item.email}
-                            image={`https://randomuser.me/api/portraits/men/${item.index}.jpg`}
-                        />
+                        return <Text>Hey</Text>
                     }} />
             </View>
         );
@@ -78,13 +73,13 @@ export const HomeTabs = () => {
             <Animated.View style={animatedStyle} >
                 <View style={{ flex: 1, }}>
                     <View style={{ padding: 8 }}>
-                        <Card>
+                        {/* <Card>
                             <Card.Content>
                                 <Title>{t('homePage:welcome')}</Title>
                                 <Paragraph>Card content</Paragraph>
                             </Card.Content>
                             <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-                        </Card>
+                        </Card> */}
                     </View>
                 </View>
             </Animated.View>
