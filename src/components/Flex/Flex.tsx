@@ -32,7 +32,7 @@ export const AppView: FC<FlexProps> = props => {
     return (
         <View style={[style, {
             flexDirection: direction, alignItems,
-            justifyContent, flex: 1, padding: paddingRequired ? scale(12) : 0
+            justifyContent, flex: 1, paddingHorizontal: paddingRequired ? scale(12) : 0
         }]} {...rest}>
             {children}
         </View>

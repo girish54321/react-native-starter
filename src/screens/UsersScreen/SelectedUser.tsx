@@ -18,7 +18,8 @@ export const SelectedUserScreen = (props: any) => {
             <ScrollView style={style.scrollView}>
                 <View style={{
                     justifyContent: 'space-around',
-                    alignItems: 'center', height: scale(160)
+                    alignItems: 'center', height: scale(160),
+                    marginTop: scale(14)
                 }}>
                     <Avatar.Image size={scale(90)} source={{ uri: data?.avatar }} />
                     <Text variant="headlineLarge">{data.first_name} {data.last_name}</Text>
