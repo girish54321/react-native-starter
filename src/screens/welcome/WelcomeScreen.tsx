@@ -1,36 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text } from "react-native";
 import { AppView, Column } from "../../components/Flex/Flex";
 import { AppButton } from "@components/Button/Button";
 import '../../localization';
 import { useTranslation } from 'react-i18next';
-import Animated, { useSharedValue, useAnimatedStyle, interpolate, withTiming, withSpring, withDelay, withRepeat, withSequence, useAnimatedGestureHandler, useAnimatedScrollHandler } from "react-native-reanimated";
-import { PanGestureHandler } from "react-native-gesture-handler";
+import Animated, { useSharedValue, useAnimatedStyle, interpolate, withTiming } from "react-native-reanimated";
 
-export const WelcomeScreen = (props: any) => {
+export const WelcomeScreen = () => {
 
     const { t } = useTranslation();
     const opacity = useSharedValue(.5)
-    const touchx = useSharedValue(0)
-    const touchY = useSharedValue(0)
-
-    const gestureHandler = useAnimatedGestureHandler({
-        onActive: (event) => {
-            touchx.value = event.translationX;
-            touchY.value = event.translationY;
-        },
-        onEnd: () => {
-            touchx.value = withSpring(0);
-            touchY.value = withSpring(0);
-        }
-    })
-
-    const scrollY = useSharedValue(0);
-
-
-    const scrollHandler = useAnimatedScrollHandler((event) => {
-        scrollY.value = event.contentOffset.y;
-    })
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -43,8 +22,6 @@ export const WelcomeScreen = (props: any) => {
                         [0.5, 1.2]
                     )
                 }
-                // { translateX: touchx.value },
-                // { translateY: touchY.value }
             ]
         }
     })
@@ -80,18 +57,6 @@ export const WelcomeScreen = (props: any) => {
 
     return (
         <AppView>
-            {/* <Animated.ScrollView onScroll={scrollHandler}
-                scrollEventThrottle={16}
-                style={{
-                    height: '100%',
-                    width: '100%',
-                }}
-                contentContainerStyle={{
-                    height: '100%',
-                    justifyContent: 'center'
-                }}
-            >
-                <PanGestureHandler onGestureEvent={gestureHandler}> */}
             <Animated.View style={[{ flex: 1 }, animatedStyle]}>
                 <Column alignItems="center" justifyContent="center" style={[style.container,]}>
                     <Text>homePage NS: {t('homePage:welcome')}</Text>
@@ -104,8 +69,6 @@ export const WelcomeScreen = (props: any) => {
                     </AppButton>
                 </Column>
             </Animated.View>
-            {/* </PanGestureHandler>
-            </Animated.ScrollView> */}
         </AppView>
     );
 }
