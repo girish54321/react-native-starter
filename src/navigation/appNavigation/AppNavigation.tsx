@@ -67,7 +67,7 @@ export const AppBottomTab = () => {
                     },
                 }}
             />
-            <Tab.Screen name={Route.USERSCREEN} component={UsersListStack}
+            <Tab.Screen name={Route.USERSCREEN_TAB} component={UsersListStack}
                 options={{
                     tabBarLabel: t('users'),
                     tabBarIcon: ({ color, size }) => {
