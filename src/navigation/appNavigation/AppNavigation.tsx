@@ -75,7 +75,7 @@ export const AppBottomTab = () => {
                     },
                 }}
             />
-            <Tab.Screen name={Route.SETTINGS} component={SettingScreenStack}
+            <Tab.Screen name={Route.SETTINGS_TAB} component={SettingScreenStack}
                 options={{
                     tabBarLabel: t('settings'),
                     tabBarIcon: ({ color, size }) => {
