@@ -1,23 +1,26 @@
-# React Native TypeScript Starter with Flavors ❤️
+# React Native TypeScript Starter with Flavors ❤️ now with Material 3
 
+## Welcome
 
-## Welcome 
 Welcome to our React Native starter repo! This repo includes a variety of core features to help you get started building a top-quality mobile app.
 
 ## CodePush
+
 We've included CodePush support, so you can easily deploy updates to your app without requiring users to update from the app store.
 
 ## Flavor builds
+
 Need to create different versions of your app for different markets or audiences? No problem! This starter repo includes support for flavor builds, so you can easily create unique versions of your app with their own branding, assets, and configurations.
 
 ## Redux with Axios
+
 We've included both Redux and Axios to help you manage the state of your app and make HTTP requests in a consistent and efficient manner.
 
 Get started building your dream app today with this powerful React Native starter repo!
- 
+
 <img width="1604"  src="appImages/banner.png?raw=true">
 
-##  
+##
 
 <img width="1604"  src="appImages/banner2.png?raw=true">
 
@@ -46,30 +49,35 @@ On Android DEV
 ```bash
   yarn android_dev_debug
 ```
+
 On Android Staging
 
 ```bash
   yarn android_staging_debug
 ```
+
 On Android PROD
 
 ```bash
   yarn android_prod_debug
 ```
+
 On iOS or use XCode
 
 ```bash
   cd ios && pod install && cd .. && yarn run ios11
 ```
+
 ## FAQ
 
 #### How to change ios simulator
 
-Go to ```package.json``` file add you favorite ❤️ simulator
+Go to `package.json` file add you favorite ❤️ simulator
 
 ### Geting error react native cannot use import statement outside a module
 
 I All so get this error for this maybe try switching to `backup` branch or copy & paste below code in `package.json`
+
 ```
   "devDependencies": {
     "@babel/core": "^7.10.2",
