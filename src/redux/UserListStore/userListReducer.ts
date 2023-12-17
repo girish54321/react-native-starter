@@ -1,6 +1,5 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserList } from 'models/responseType/UserListResponse'
-import { createReducer } from "reduxsauce";
-import UserActionTypes from "./UserActionTypes"
 export interface USER_LIST_STATE_TYPE {
   isLoading: boolean;
   error: string;
@@ -13,8 +12,8 @@ const INITIAL_STATE: USER_LIST_STATE_TYPE = {
   users: [],
 }
 
-const setUserDataReducer = (state: USER_LIST_STATE_TYPE,action :any) => {
-  let data = action.payload 
+const setUserDataReducer = (state: USER_LIST_STATE_TYPE, action: any) => {
+  let data = action.payload
   return {
     ...state,
     users: data,
@@ -23,7 +22,7 @@ const setUserDataReducer = (state: USER_LIST_STATE_TYPE,action :any) => {
   }
 }
 
-const setUserErrorReducer = (state: USER_LIST_STATE_TYPE,action :any) => {
+const setUserErrorReducer = (state: USER_LIST_STATE_TYPE, action: any) => {
   return {
     ...state,
     isLoading: false,
@@ -39,10 +38,23 @@ const setUserLoadingReducer = (state: USER_LIST_STATE_TYPE) => {
   }
 }
 
-const ACTION_HANDLERS = {
-  [UserActionTypes.SET_USER]: setUserDataReducer,
-  [UserActionTypes.SET_USER_LOADING]: setUserErrorReducer,
-  [UserActionTypes.SET_USER_ERROR]: setUserLoadingReducer
-}
 
-export default createReducer(INITIAL_STATE, ACTION_HANDLERS);
+//State slice
+export const userListSlice = createSlice({
+  name: "userListSlice",
+  initialState: INITIAL_STATE,
+  reducers: {
+    setUserErrorReducer: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
+      return setUserErrorReducer(state, action)
+    },
+    setUserLoadingReducer: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
+      return setUserLoadingReducer(state)
+    },
+    setUserDataReducer: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
+      return setUserDataReducer(state, action)
+    },
+  },
+});
+
+
+export default userListSlice.reducer;

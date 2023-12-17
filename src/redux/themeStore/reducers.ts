@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-community/async-storage'
 import ThemActionType from './themActionType'
-import { createReducer } from "reduxsauce";
+import AsyncStorage from '@react-native-community/async-storage';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface DARK_THEME_TYPE {
   isDarkTheme: boolean
@@ -10,7 +10,7 @@ const INITIAL_STATE: DARK_THEME_TYPE = {
   isDarkTheme: false
 }
 
-const changeThemReducer = (state: DARK_THEME_TYPE,action :any) => {
+const changeThemReducer = (state: DARK_THEME_TYPE, action: any) => {
   const jsonValue = JSON.stringify({ isDarkTheme: action.payload })
   AsyncStorage.setItem(ThemActionType.CHECK_THEME, jsonValue);
   return {
@@ -19,17 +19,26 @@ const changeThemReducer = (state: DARK_THEME_TYPE,action :any) => {
   }
 }
 
-const checkThemReducer = (state: DARK_THEME_TYPE,action :any) => {
+const checkThemReducer = (state: DARK_THEME_TYPE, action: PayloadAction<boolean>) => {
   return {
     ...state,
     isDarkTheme: action.payload
   }
 }
 
-const ACTION_HANDLERS = {
-  [ThemActionType.CHNAGE_THEME]: changeThemReducer,
-  [ThemActionType.CHECK_THEME]: checkThemReducer,
-}
 
-export default createReducer(INITIAL_STATE, ACTION_HANDLERS);
- 
+export const themSlice = createSlice({
+  name: "themSlice",
+  initialState: INITIAL_STATE,
+  reducers: {
+    changeThemReducer: (state, action: PayloadAction<DARK_THEME_TYPE>) => {
+      return changeThemReducer(state, action)
+    },
+    checkThemReducer: (state, action: PayloadAction<boolean>) => {
+      return checkThemReducer(state, action)
+    },
+  },
+});
+
+
+export default themSlice.reducer;

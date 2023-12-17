@@ -1,14 +1,13 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import ThemActionType from './themActionType'
+import { themSlice } from './reducers';
+import { Dispatch } from 'redux';
 
-export const checkTheme = () => async (dispatch: any, getState: any) => {
+export const checkTheme = () => async (dispatch: Dispatch,) => {
   AsyncStorage.getItem(ThemActionType.CHECK_THEME).then((data) => {
     if (data) {
       const jsonValue = JSON.parse(data);
-      dispatch({
-        type: ThemActionType.CHECK_THEME,
-        payload: jsonValue.isDarkTheme
-      })
+      dispatch(themSlice.actions.checkThemReducer(jsonValue.isDarkTheme))
     } else {
       dispatch({
         type: ThemActionType.CHECK_THEME,
@@ -17,9 +16,4 @@ export const checkTheme = () => async (dispatch: any, getState: any) => {
     }
   })
 }
-
-export const changeTheme = (payload: any) => ({
-  type: ThemActionType.CHNAGE_THEME,
-  payload,
-});
 

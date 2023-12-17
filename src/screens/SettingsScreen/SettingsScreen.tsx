@@ -5,9 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { Alert, View } from 'react-native'
 import { List, Switch } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux'
-import { logOutUser } from 'redux/authStore/action'
-import { changeTheme } from '../../redux/themeStore/action'
-import { DARK_THEME_TYPE } from '../../redux/themeStore/reducers'
+import { DARK_THEME_TYPE, themSlice } from '../../redux/themeStore/reducers'
+import { authSlice } from 'redux/authStore/authReducers'
 
 
 const SettingsScreen = () => {
@@ -16,7 +15,7 @@ const SettingsScreen = () => {
   const { t } = useTranslation();
   const authDispatch = useDispatch();
   const toggleSwitch = (value: boolean) => {
-    appDispatch(changeTheme(value));
+    appDispatch(themSlice.actions.changeThemReducer(value));
   }
 
   const removeUser = () => {
@@ -31,7 +30,7 @@ const SettingsScreen = () => {
         },
         {
           text: 'yes',
-          onPress: () => authDispatch(logOutUser()),
+          onPress: () => authDispatch(authSlice.actions.userLoginLogOutReducer())
         },
       ],
       { cancelable: false },
@@ -47,7 +46,7 @@ const SettingsScreen = () => {
         <LanguageSelector />
         <List.Item
           onPress={() => {
-            appDispatch(changeTheme(!data.isDarkTheme))
+            appDispatch(themSlice.actions.changeThemReducer(!data.isDarkTheme));
           }}
           title={t('darkLightMode')}
           description={t('changeAppTheme')}

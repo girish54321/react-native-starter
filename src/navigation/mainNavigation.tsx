@@ -11,25 +11,24 @@ import {
     MD3LightTheme as PaperDefaultTheme,
     MD3DarkTheme as PaperDarkTheme
 } from 'react-native-paper'
-import { checkTheme } from '../redux/themeStore/action';
 import { Colors } from '../Config/Colors'
 import AppStatusBar from '@components/appStatusBar/appStatusBar';
-import LoadingView from '@components/loadingView';
-import { AUTH_TYPE } from 'redux/authStore/authReducers';
+import { authSlice } from 'redux/authStore/authReducers';
 import AsyncStorage from '@react-native-community/async-storage';
-import { checkUserLogin } from 'redux/authStore/action';
 import { setTopLevelNavigator } from './NavigationService';
 import { AppBottomTab } from './appNavigation/AppNavigation';
 import AuthStackScreens from './authStack/AuthStackScreens';
+import { checkTheme } from 'redux/themeStore/action';
+import LoadingView from '@components/loadingView';
 
 export const Navigation: FC = () => {
     const data: DARK_THEME_TYPE = useSelector((state: any) => state.themeReducer);
-    const authState: AUTH_TYPE = useSelector((state: any) => state.authReducer);
-    const appDispatch = useDispatch();
+    const authState = useSelector((state: any) => state.authReducer);
     const authDispatch = useDispatch();
+    console.log("authState3", authState);
 
     useEffect(() => {
-        appDispatch(checkTheme());
+        authDispatch(checkTheme());
         checkIfLoggedIn();
     }, [])
 
@@ -38,13 +37,13 @@ export const Navigation: FC = () => {
             .then((value) => {
                 if (value) {
                     let data = JSON.parse(value);
-                    authDispatch(checkUserLogin(data));
+                    authDispatch(authSlice.actions.checkUserLoginReducer(data));
                 } else {
-                    authDispatch(checkUserLogin(null));
+                    authDispatch(authSlice.actions.checkUserLoginReducer(null));
                 }
             })
             .catch(() => {
-                authDispatch(checkUserLogin(null));
+                authDispatch(authSlice.actions.checkUserLoginReducer(null));
             });
     };
 

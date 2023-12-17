@@ -1,7 +1,7 @@
 import userListReducer from './UserListStore/userListReducer'
 import themeReducer from './themeStore/reducers'
-import  authReducer from './authStore/authReducers'
-import { combineReducers } from 'redux'
+import authReducer from './authStore/authReducers'
+import logger from 'redux-logger'
 
 const rootReducer = combineReducers({
   userListReducer,
@@ -9,4 +9,9 @@ const rootReducer = combineReducers({
   authReducer
 })
 
-export default rootReducer
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+})
