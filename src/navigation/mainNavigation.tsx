@@ -37,13 +37,13 @@ export const Navigation: FC = () => {
             .then((value) => {
                 if (value) {
                     let data = JSON.parse(value);
-                    authDispatch(authSlice.actions.checkUserLoginReducer(data));
+                    authDispatch(authSlice.actions.checkUserLoginAction(data));
                 } else {
-                    authDispatch(authSlice.actions.checkUserLoginReducer(null));
+                    authDispatch(authSlice.actions.checkUserLoginAction(null));
                 }
             })
             .catch(() => {
-                authDispatch(authSlice.actions.checkUserLoginReducer(null));
+                authDispatch(authSlice.actions.checkUserLoginAction(null));
             });
     };
 

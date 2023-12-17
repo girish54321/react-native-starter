@@ -10,7 +10,7 @@ const INITIAL_STATE: DARK_THEME_TYPE = {
   isDarkTheme: false
 }
 
-const changeThemReducer = (state: DARK_THEME_TYPE, action: any) => {
+const changeThemAction = (state: DARK_THEME_TYPE, action: any) => {
   const jsonValue = JSON.stringify({ isDarkTheme: action.payload })
   AsyncStorage.setItem(ThemActionType.CHECK_THEME, jsonValue);
   return {
@@ -19,7 +19,7 @@ const changeThemReducer = (state: DARK_THEME_TYPE, action: any) => {
   }
 }
 
-const checkThemReducer = (state: DARK_THEME_TYPE, action: PayloadAction<boolean>) => {
+const checkThemAction = (state: DARK_THEME_TYPE, action: PayloadAction<boolean>) => {
   return {
     ...state,
     isDarkTheme: action.payload
@@ -31,11 +31,11 @@ export const themSlice = createSlice({
   name: "themSlice",
   initialState: INITIAL_STATE,
   reducers: {
-    changeThemReducer: (state, action: PayloadAction<DARK_THEME_TYPE>) => {
-      return changeThemReducer(state, action)
+    changeThemAction: (state, action: PayloadAction<DARK_THEME_TYPE>) => {
+      return changeThemAction(state, action)
     },
-    checkThemReducer: (state, action: PayloadAction<boolean>) => {
-      return checkThemReducer(state, action)
+    checkThemAction: (state, action: PayloadAction<boolean>) => {
+      return checkThemAction(state, action)
     },
   },
 });

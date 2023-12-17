@@ -22,19 +22,19 @@ export const authSlice = createSlice({
   name: "authSlice",
   initialState: INITIAL_STATE,
   reducers: {
-    userLoginReducer: (state, action: PayloadAction<AUTH_TYPE>) => {
+    userLoginAction: (state, action: PayloadAction<AUTH_TYPE>) => {
       const jsonValue = JSON.stringify(action.payload);
       AsyncStorage.setItem('USER_LOGIN', jsonValue);
       return { ...state, ...action.payload };
     },
-    checkUserLoginReducer: (state, action: PayloadAction<AUTH_TYPE>) => {
+    checkUserLoginAction: (state, action: PayloadAction<AUTH_TYPE>) => {
       return {
         ...state,
         ...action.payload,
         isLoading: false,
       }
     },
-    userLoginLogOutReducer: (state) => {
+    userLoginLogOutAction: (state) => {
       AsyncStorage.removeItem('USER_LOGIN');
       return {
         ...state,

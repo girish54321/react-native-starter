@@ -7,7 +7,7 @@ export const checkTheme = () => async (dispatch: Dispatch,) => {
   AsyncStorage.getItem(ThemActionType.CHECK_THEME).then((data) => {
     if (data) {
       const jsonValue = JSON.parse(data);
-      dispatch(themSlice.actions.checkThemReducer(jsonValue.isDarkTheme))
+      dispatch(themSlice.actions.checkThemAction(jsonValue.isDarkTheme))
     } else {
       dispatch({
         type: ThemActionType.CHECK_THEME,

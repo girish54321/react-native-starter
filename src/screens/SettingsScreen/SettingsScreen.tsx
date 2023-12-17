@@ -15,7 +15,7 @@ const SettingsScreen = () => {
   const { t } = useTranslation();
   const authDispatch = useDispatch();
   const toggleSwitch = (value: boolean) => {
-    appDispatch(themSlice.actions.changeThemReducer(value));
+    appDispatch(themSlice.actions.changeThemAction(value));
   }
 
   const removeUser = () => {
@@ -30,7 +30,7 @@ const SettingsScreen = () => {
         },
         {
           text: 'yes',
-          onPress: () => authDispatch(authSlice.actions.userLoginLogOutReducer())
+          onPress: () => authDispatch(authSlice.actions.userLoginLogOutAction())
         },
       ],
       { cancelable: false },
@@ -46,7 +46,7 @@ const SettingsScreen = () => {
         <LanguageSelector />
         <List.Item
           onPress={() => {
-            appDispatch(themSlice.actions.changeThemReducer(!data.isDarkTheme));
+            appDispatch(themSlice.actions.changeThemAction(!data.isDarkTheme));
           }}
           title={t('darkLightMode')}
           description={t('changeAppTheme')}

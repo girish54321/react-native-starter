@@ -10,7 +10,7 @@ export const userLoginAction = (queryParam: any): any => async (appDispatch: Dis
       userLoggedIn: true,
       token: responseAxios.token
     }
-    appDispatch(authSlice.actions.userLoginReducer(data));
+    appDispatch(authSlice.actions.userLoginAction(data));
   }).catch((error: any) => {
     handleApiError(error, appDispatch);
   });

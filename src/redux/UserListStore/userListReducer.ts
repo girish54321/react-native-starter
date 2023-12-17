@@ -12,7 +12,7 @@ const INITIAL_STATE: USER_LIST_STATE_TYPE = {
   users: [],
 }
 
-const setUserDataReducer = (state: USER_LIST_STATE_TYPE, action: any) => {
+const setUserDataAction = (state: USER_LIST_STATE_TYPE, action: any) => {
   let data = action.payload
   return {
     ...state,
@@ -22,7 +22,7 @@ const setUserDataReducer = (state: USER_LIST_STATE_TYPE, action: any) => {
   }
 }
 
-const setUserErrorReducer = (state: USER_LIST_STATE_TYPE, action: any) => {
+const setUserErrorAction = (state: USER_LIST_STATE_TYPE, action: any) => {
   return {
     ...state,
     isLoading: false,
@@ -30,7 +30,7 @@ const setUserErrorReducer = (state: USER_LIST_STATE_TYPE, action: any) => {
   }
 }
 
-const setUserLoadingReducer = (state: USER_LIST_STATE_TYPE) => {
+const setUserLoadingAction = (state: USER_LIST_STATE_TYPE) => {
   return {
     ...state,
     isLoading: true,
@@ -44,14 +44,14 @@ export const userListSlice = createSlice({
   name: "userListSlice",
   initialState: INITIAL_STATE,
   reducers: {
-    setUserErrorReducer: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
-      return setUserErrorReducer(state, action)
+    setUserErrorAction: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
+      return setUserErrorAction(state, action)
     },
-    setUserLoadingReducer: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
-      return setUserLoadingReducer(state)
+    setUserLoadingAction: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
+      return setUserLoadingAction(state)
     },
-    setUserDataReducer: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
-      return setUserDataReducer(state, action)
+    setUserDataAction: (state, action: PayloadAction<USER_LIST_STATE_TYPE>) => {
+      return setUserDataAction(state, action)
     },
   },
 });
