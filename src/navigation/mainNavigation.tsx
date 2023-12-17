@@ -11,7 +11,7 @@ import {
     MD3LightTheme as PaperDefaultTheme,
     MD3DarkTheme as PaperDarkTheme
 } from 'react-native-paper'
-import { Colors } from '../Config/Colors'
+import { APP_CONST, Colors } from '../Config/Colors'
 import AppStatusBar from '@components/appStatusBar/appStatusBar';
 import { authSlice } from 'redux/authStore/authReducers';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -33,7 +33,7 @@ export const Navigation: FC = () => {
     }, [])
 
     const checkIfLoggedIn = () => {
-        AsyncStorage.getItem('USER_LOGIN')
+        AsyncStorage.getItem(APP_CONST.USER_LOGIN)
             .then((value) => {
                 if (value) {
                     let data = JSON.parse(value);

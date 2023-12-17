@@ -65,7 +65,6 @@
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "reduxsauce": "^1.2.1",
     "tsyringe": "^4.0.1"
   },
   "devDependencies": {

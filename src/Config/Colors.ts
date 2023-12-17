@@ -6,3 +6,7 @@ export const Colors = {
   backgroundColor: '#333333',
   loadingColor: '#DCDCDC'
 }
+export const APP_CONST = {
+  CHECK_THEME: "CHECK_THEME",
+  USER_LOGIN: "USER_LOGIN"
+}
