@@ -1,12 +1,13 @@
 import { AppView } from '@components/Flex/Flex'
 import LanguageSelector from '@components/LanguageSelector'
-import React from 'react'
+import React, { useCallback, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Alert, View } from 'react-native'
-import { List, Switch } from 'react-native-paper'
+import { Alert, ScrollView, Text, View } from 'react-native'
+import { List, Switch, TextInput } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux'
 import { DARK_THEME_TYPE, themSlice } from '../../redux/themeStore/reducers'
 import { authSlice } from 'redux/authStore/authReducers'
+import BottomSheet, { BottomSheetScrollView, BottomSheetTextInput } from '@gorhom/bottom-sheet'
 
 
 const SettingsScreen = () => {
@@ -17,6 +18,16 @@ const SettingsScreen = () => {
   const toggleSwitch = (value: boolean) => {
     appDispatch(themSlice.actions.changeThemAction(value));
   }
+
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
   const removeUser = () => {
     Alert.alert(
@@ -43,7 +54,36 @@ const SettingsScreen = () => {
         style={{
           flex: 1
         }}>
-        <LanguageSelector />
+        <ScrollView>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9].map((data) => {
+            return (
+              <View>
+                <TextInput />
+                <Text onPress={() => {
+                  bottomSheetRef.current.expand()
+                }}>Open</Text>
+                <Text onPress={() => {
+                  bottomSheetRef.current.close()
+                }}>Close</Text>
+              </View>
+            )
+          })}
+        </ScrollView>
+
+        <BottomSheet
+          ref={bottomSheetRef}
+          index={-1}
+          enableDynamicSizing={true}
+          enablePanDownToClose={true}
+          // snapPoints={snapPoints}
+          onChange={handleSheetChanges}
+        >
+          <BottomSheetScrollView style={{ flex: 1 }}>
+            <BottomSheetTextInput />
+            <Text>Awesome 🎉</Text>
+          </BottomSheetScrollView>
+        </BottomSheet>
+        {/* <LanguageSelector />
         <List.Item
           onPress={() => {
             appDispatch(themSlice.actions.changeThemAction(!data.isDarkTheme));
@@ -60,8 +100,9 @@ const SettingsScreen = () => {
           title={t('logOut')}
           description={t('singOut')}
           left={(props) => <List.Icon {...props} icon="exit-to-app" />}
-        />
+        /> */}
       </View>
+
     </AppView>
   )
 }

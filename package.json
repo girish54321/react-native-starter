@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "clean:node": "yarn start --reset-cache",
-    "start": "NODE_ENV=development react-native start",
+    "start": "react-native start",
     "postinstall": "jetify",
     "ios14": "react-native run-ios --simulator=\"iPhone 14\"",
     "ios8": "react-native run-ios --simulator=\"iPhone 8\"",
@@ -30,6 +30,7 @@
     "ios_deploy_prod": "appcenter codepush release-react -a parategirish50-gmail.com/Starter-App-iOS -d Production"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4",
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "^0.1.6",
     "@react-navigation/bottom-tabs": "^6.5.7",

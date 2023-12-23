@@ -1,7 +1,7 @@
 PODS:
   - Base64 (1.1.2)
   - boost (1.76.0)
-  - CodePush (7.0.5):
+  - CodePush (7.1.0):
     - Base64 (~> 1.1)
     - JWT (~> 3.0.0-beta.12)
     - React-Core
@@ -309,7 +309,7 @@ PODS:
     - React-Core
   - RNLocalize (1.4.3):
     - React-Core
-  - RNReanimated (2.13.0):
+  - RNReanimated (2.17.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -490,7 +490,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  CodePush: ef496b6fd053012e985e3d4a0ab9f9dbf2739eac
+  CodePush: dce1b253fde81078249ea9cd4b948e4ac7b761a9
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: 2b47ff52037bd9ae07cc9b051c9975797814b736
   FBReactNativeSpec: 0e0d384ef17a33b385f13f0c7f97702c7cd17858
@@ -529,7 +529,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNLocalize: 7c7aeda16c01db7a0918981c14875c0a53be9b79
-  RNReanimated: b21b362b4b8ca921932e8b1718e88cf3a36f157e
+  RNReanimated: 1f117be601c59177816351a965bc57320b766c15
   RNScreens: 3d682bcaba69a4f8e55543d90818704f34338db1
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
@@ -538,4 +538,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7a42b3d1c717dfdfca479dcc387351a58b6f8340
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.13.0
