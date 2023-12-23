@@ -45,10 +45,11 @@ export const App = () => {
 
     // render
     const renderItem = useCallback(
-        (item) => (
+        (item, index) => (
             <View key={item} style={styles.itemContainer}>
-                <TextInput style={styles.input} />
+                {index === 0 ? <TextInput style={styles.input} /> : null}
                 <Text>{item}</Text>
+                <Text>{`${index}`}</Text>
             </View>
         ),
         []
