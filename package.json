@@ -30,6 +30,7 @@
     "ios_deploy_prod": "appcenter codepush release-react -a parategirish50-gmail.com/Starter-App-iOS -d Production"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.8",
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "^0.1.6",
     "@react-navigation/bottom-tabs": "^6.5.7",
@@ -43,6 +44,7 @@
     "@types/redux-thunk": "^2.1.0",
     "appcenter-cli": "^2.10.8",
     "axios": "^0.21.1",
+    "graphql": "^16.8.1",
     "i18next": "^19.6.2",
     "moment": "^2.27.0",
     "react": "17.0.2",

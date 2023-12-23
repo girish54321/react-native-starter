@@ -17,8 +17,8 @@ export const UsersListStack = () => {
                 header: (props) => <CustomNavigationBar {...props} />,
             }}
         >
-            <UserStack.Screen name={Route.USERSCREEN} component={UsersScreen} />
-            <UserStack.Screen name={Route.SELECTEDUSERSCREEN} component={SelectedUserScreen} />
+            <UserStack.Screen name={Route.USER_SCREEN} component={UsersScreen} />
+            <UserStack.Screen name={Route.SELECTED_USER_SCREEN} component={SelectedUserScreen} />
         </UserStack.Navigator>
     )
 }
