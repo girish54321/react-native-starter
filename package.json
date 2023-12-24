@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "clean:node": "yarn start --reset-cache",
-    "start": "NODE_ENV=development react-native start",
+    "start": "react-native start",
     "postinstall": "jetify",
     "ios14": "react-native run-ios --simulator=\"iPhone 14\"",
     "ios8": "react-native run-ios --simulator=\"iPhone 8\"",
