@@ -4,6 +4,7 @@ import { Provider, } from 'react-redux'
 import { store } from './redux/rootReducer'
 import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { AutocompleteDropdownContextProvider } from "react-native-autocomplete-dropdown";
 
 const httpLink = createHttpLink({
     uri: 'https://api.yelp.com/v3/graphql',
@@ -31,11 +32,13 @@ const client = new ApolloClient({
 
 export const App: FC = () => {
     return (
-        <ApolloProvider client={client}>
-            <Provider store={store}>
-                <Navigation />
-            </Provider>
-        </ApolloProvider>
+        <AutocompleteDropdownContextProvider>
+            <ApolloProvider client={client}>
+                <Provider store={store}>
+                    <Navigation />
+                </Provider>
+            </ApolloProvider>
+        </AutocompleteDropdownContextProvider>
     );
 }
 
