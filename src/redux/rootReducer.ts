@@ -1,12 +1,14 @@
 import userListReducer from './UserListStore/userListReducer'
 import themeReducer from './themeStore/reducers'
 import authReducer from './authStore/authReducers'
+import appReducers from './appStore/AppReducers'
 import logger from 'redux-logger'
 
 const rootReducer = combineReducers({
   userListReducer,
   themeReducer,
-  authReducer
+  authReducer,
+  appReducers
 })
 
 import { combineReducers, configureStore } from "@reduxjs/toolkit";

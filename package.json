@@ -30,6 +30,7 @@
     "ios_deploy_prod": "appcenter codepush release-react -a parategirish50-gmail.com/Starter-App-iOS -d Production"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4",
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "^0.1.6",
     "@react-navigation/bottom-tabs": "^6.5.7",
