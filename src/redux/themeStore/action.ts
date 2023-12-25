@@ -1,25 +1,19 @@
 import AsyncStorage from '@react-native-community/async-storage'
-import ThemActionType from './themActionType'
+import { themSlice } from './reducers';
+import { Dispatch } from 'redux';
+import { APP_CONST } from 'Config/Colors';
 
-export const checkTheme = () => async (dispatch: any, getState: any) => {
-  AsyncStorage.getItem(ThemActionType.CHECK_THEME).then((data) => {
+export const checkTheme = () => async (dispatch: Dispatch,) => {
+  AsyncStorage.getItem(APP_CONST.CHECK_THEME).then((data) => {
     if (data) {
       const jsonValue = JSON.parse(data);
-      dispatch({
-        type: ThemActionType.CHECK_THEME,
-        payload: jsonValue.isDarkTheme
-      })
+      dispatch(themSlice.actions.checkThemAction(jsonValue.isDarkTheme))
     } else {
       dispatch({
-        type: ThemActionType.CHECK_THEME,
+        type: APP_CONST.CHECK_THEME,
         payload: false
       })
     }
   })
 }
-
-export const changeTheme = (payload: any) => ({
-  type: ThemActionType.CHNAGE_THEME,
-  payload,
-});
 

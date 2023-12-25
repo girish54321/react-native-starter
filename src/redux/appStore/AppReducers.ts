@@ -2,33 +2,33 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { APP_CONST } from 'Config/Colors';
 
-interface AUTH_TYPE {
+export interface APP_STATE {
   isLoading: boolean;
-  userLoggedIn: boolean;
-  userName: string | null;
-  email: string | null;
-  token: string | null;
+  showModalSheet: boolean;
 }
 
-const INITIAL_STATE: AUTH_TYPE = {
-  isLoading: true,
-  userLoggedIn: false,
-  userName: null,
-  email: null,
-  token: null,
+const INITIAL_STATE: APP_STATE = {
+  isLoading: false,
+  showModalSheet: false,
 };
 
 
-export const authSlice = createSlice({
-  name: "authSlice",
+export const appSlice = createSlice({
+  name: "appSlice",
   initialState: INITIAL_STATE,
   reducers: {
-    userLoginAction: (state, action: PayloadAction<AUTH_TYPE>) => {
+    showLoaderAction: (state) => {
+      return { ...state, isLoading: true };
+    },
+    hideLoaderAction: (state) => {
+      return { ...state, isLoading: false };
+    },
+    userLoginAction: (state, action: PayloadAction<APP_STATE>) => {
       const jsonValue = JSON.stringify(action.payload);
       AsyncStorage.setItem(APP_CONST.USER_LOGIN, jsonValue);
       return { ...state, ...action.payload };
     },
-    checkUserLoginAction: (state, action: PayloadAction<AUTH_TYPE | null>) => {
+    checkUserLoginAction: (state, action: PayloadAction<APP_STATE>) => {
       return {
         ...state,
         ...action.payload,
@@ -49,4 +49,4 @@ export const authSlice = createSlice({
 });
 
 
-export default authSlice.reducer;
+export default appSlice.reducer;

@@ -1,28 +1,17 @@
-import UserActionTypes from "./UserActionTypes"
 import { call } from 'Network/services';
 import { handleApiError } from 'Config/ErrorHandleUtils';
 import { Dispatch } from 'redux';
+import { userListSlice } from './userListReducer';
+import { appSlice } from 'redux/appStore/AppReducers';
 
 
 export const getServiceResponse = (queryParam: any): any => async (appDispatch: Dispatch) => {
+  appDispatch(appSlice.actions.showLoaderAction())
   call.getService(queryParam).then((responseAxios: any) => {
-    appDispatch(setUserDataAction(responseAxios.data))
+    appDispatch(userListSlice.actions.setUserDataAction(responseAxios.data))
+    appDispatch(appSlice.actions.hideLoaderAction())
   }).catch((error: any) => {
-      handleApiError(error, appDispatch);
+    appDispatch(appSlice.actions.hideLoaderAction())
+    handleApiError(error, appDispatch);
   });
 };
-
-const setUserDataAction = (payload:any) =>({
-  type: UserActionTypes.SET_USER,
-  payload
-})
-
-export const setUserListError = (payload: any) => ({
-  type: UserActionTypes.SET_USER_ERROR,
-  payload
-
-})
-
-export const setHomeLoading = () => ({
-  type: UserActionTypes.SET_USER_LOADING,
-})
