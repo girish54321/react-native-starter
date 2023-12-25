@@ -14,7 +14,6 @@ export const SelectedUserScreen = (props: any) => {
         props.navigation.setOptions({ title: `${data.first_name} ${data.last_name}` })
     }, [])
 
-
     // ref
     const bottomSheetRef = useRef<BottomSheet>(null);
 

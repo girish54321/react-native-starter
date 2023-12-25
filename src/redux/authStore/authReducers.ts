@@ -28,7 +28,7 @@ export const authSlice = createSlice({
       AsyncStorage.setItem(APP_CONST.USER_LOGIN, jsonValue);
       return { ...state, ...action.payload };
     },
-    checkUserLoginAction: (state, action: PayloadAction<AUTH_TYPE>) => {
+    checkUserLoginAction: (state, action: PayloadAction<AUTH_TYPE | null>) => {
       return {
         ...state,
         ...action.payload,
