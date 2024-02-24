@@ -1,17 +1,23 @@
 import React from 'react';
 import { View, StyleSheet, Modal } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
-import { useSelector } from 'react-redux';
-import { APP_STATE } from 'redux/appStore/AppReducers';
+import { create } from 'zustand';
+
+export const useAppLoaderStore = create((set) => ({
+  isLoading: false,
+  showLoader: () => set((state) => ({ isLoading: true })),
+  hideLoader: () => set((state) => ({ isLoading: false })),
+}))
+
 
 const AppLoaderModal = () => {
-  const appState: APP_STATE = useSelector((state: any) => state.appReducers);
+  const isLoading = useAppLoaderStore((state) => state.isLoading)
 
   return (
     <Modal
       animationType="slide"
       transparent={true}
-      visible={appState.isLoading}
+      visible={isLoading}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
