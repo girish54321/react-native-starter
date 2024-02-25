@@ -47,7 +47,6 @@ export const Navigation: FC = () => {
             .then((value) => {
                 if (value) {
                     let data = JSON.parse(value);
-                    console.log("data data", data);
                     checkUserLoginAction(data)
                 } else {
                     checkUserLoginAction(null)
@@ -89,9 +88,6 @@ export const Navigation: FC = () => {
     if (isLoading) {
         return <LoadingView />;
     }
-
-    console.log("App ");
-
 
     return (
         <PaperProvider theme={isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
