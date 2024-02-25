@@ -8,7 +8,7 @@ import { useUserListStore } from "redux/UserListStore/userListReducer";
 import { navigate } from "@navigation/NavigationService";
 
 export const UsersScreen = (_props: any) => {
-    const data = useUserListStore((state) => state.users)
+    const { users } = useUserListStore((state) => state.userListStore)
     const selectUserAction = useUserListStore((state) => state.selectUserAction)
     const { getServiceResponse } = useUserListService()
 
@@ -19,7 +19,7 @@ export const UsersScreen = (_props: any) => {
     return (
         <AppView>
             <FlatList
-                data={data}
+                data={users}
                 keyExtractor={(item: any,) => item.id.toString()}
                 renderItem={({ item }) => {
                     return (

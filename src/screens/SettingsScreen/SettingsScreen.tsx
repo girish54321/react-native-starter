@@ -6,14 +6,15 @@ import { Alert, View } from 'react-native'
 import { List, Switch } from 'react-native-paper'
 import { useSelector, useDispatch } from 'react-redux'
 import { DARK_THEME_TYPE, themSlice } from '../../redux/themeStore/reducers'
-import { authSlice } from 'redux/authStore/authReducers'
+import { useAuthStore } from 'redux/authStore/authReducers'
 
 
 const SettingsScreen = () => {
   const appDispatch = useDispatch();
   const data: DARK_THEME_TYPE = useSelector((state: any) => state.themeReducer);
+  const { userLoginLogOutAction } = useAuthStore((state) => state)
+
   const { t } = useTranslation();
-  const authDispatch = useDispatch();
   const toggleSwitch = (value: boolean) => {
     appDispatch(themSlice.actions.changeThemAction(value));
   }
@@ -30,7 +31,7 @@ const SettingsScreen = () => {
         },
         {
           text: 'yes',
-          onPress: () => authDispatch(authSlice.actions.userLoginLogOutAction())
+          onPress: () => userLoginLogOutAction()
         },
       ],
       { cancelable: false },

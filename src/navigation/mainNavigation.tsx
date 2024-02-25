@@ -13,19 +13,20 @@ import {
 } from 'react-native-paper'
 import { APP_CONST, Colors } from '../Config/Colors'
 import AppStatusBar from '@components/appStatusBar/appStatusBar';
-import { authSlice } from 'redux/authStore/authReducers';
 import AsyncStorage from '@react-native-community/async-storage';
 import { setTopLevelNavigator } from './NavigationService';
 import { AppBottomTab } from './appNavigation/AppNavigation';
 import AuthStackScreens from './authStack/AuthStackScreens';
 import { checkTheme } from 'redux/themeStore/action';
 import LoadingView from '@components/loadingView';
+import { useAuthStore } from 'redux/authStore/authReducers';
 
 export const Navigation: FC = () => {
     const data: DARK_THEME_TYPE = useSelector((state: any) => state.themeReducer);
-    const authState = useSelector((state: any) => state.authReducer);
     const authDispatch = useDispatch();
-    console.log("authState3", authState);
+    const { checkUserLoginAction } = useAuthStore((state) => state)
+    const { isLoading, userLoggedIn } = useAuthStore((state) => state.useAuthStore)
+
 
     useEffect(() => {
         authDispatch(checkTheme());
@@ -37,13 +38,14 @@ export const Navigation: FC = () => {
             .then((value) => {
                 if (value) {
                     let data = JSON.parse(value);
-                    authDispatch(authSlice.actions.checkUserLoginAction(data));
+                    console.log("data data", data);
+                    checkUserLoginAction(data)
                 } else {
-                    authDispatch(authSlice.actions.checkUserLoginAction(null));
+                    checkUserLoginAction(null)
                 }
             })
             .catch(() => {
-                authDispatch(authSlice.actions.checkUserLoginAction(null));
+                checkUserLoginAction(null)
             });
     };
 
@@ -75,7 +77,7 @@ export const Navigation: FC = () => {
         }
     }
 
-    if (authState.isLoading) {
+    if (isLoading) {
         return <LoadingView />;
     }
 
@@ -87,7 +89,7 @@ export const Navigation: FC = () => {
                     setTopLevelNavigator(navigatorRef);
                 }}
                 theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
-                {authState.userLoggedIn ? (
+                {userLoggedIn ? (
                     <AppBottomTab />
                 ) : (
                     <AuthStackScreens />

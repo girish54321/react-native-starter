@@ -1,11 +1,10 @@
 import { UserList } from 'models/responseType/UserListResponse'
 import { create } from 'zustand'
-import { call } from 'Network/services';
 
 export interface USER_LIST_STATE_TYPE {
-  isLoading: boolean;
-  error: string;
-  users: UserList[];
+  isLoading?: boolean;
+  error?: string;
+  users?: UserList[];
   selected?: UserList;
 }
 interface IUseUserListStore {
@@ -26,11 +25,20 @@ const INITIAL_STATE: USER_LIST_STATE_TYPE = {
 
 
 export const useUserListStore = create<IUseUserListStore>()((set) => ({
+  ...INITIAL_STATE,
   userListStore: INITIAL_STATE,
-  setUserErrorAction: (data) => set((state) => ({ ...state, error: data })),
-  setUserLoadingAction: () => set((state) => ({ ...state, isLoading: false })),
-  setUserDataAction: (data) => set((state) => ({ ...state, users: data })),
-  selectUserAction: (data) => set((state) => ({ ...state, selected: data })),
+  setUserErrorAction: (data) => set((state) => ({
+    userListStore: {
+      ...state.userListStore, error: data
+    }
+  })),
+  setUserLoadingAction: () => set((state) => ({ userListStore: { ...state.userListStore, isLoading: false } })),
+  setUserDataAction: (data) => set((state) => ({ userListStore: { ...state.userListStore, users: data } })),
+  selectUserAction: (data) => set((state) => ({
+    userListStore: {
+      ...state.userListStore, selected: data
+    }
+  })),
 }))
 
 
