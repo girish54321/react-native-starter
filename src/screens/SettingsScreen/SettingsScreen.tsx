@@ -1,22 +1,23 @@
+import React from 'react'
 import { AppView } from '@components/Flex/Flex'
 import LanguageSelector from '@components/LanguageSelector'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Alert, View } from 'react-native'
 import { List, Switch } from 'react-native-paper'
-import { useSelector, useDispatch } from 'react-redux'
-import { DARK_THEME_TYPE, themSlice } from '../../redux/themeStore/reducers'
+import { userThemStore } from '../../redux/themeStore/reducers'
 import { useAuthStore } from 'redux/authStore/authReducers'
 
 
 const SettingsScreen = () => {
-  const appDispatch = useDispatch();
-  const data: DARK_THEME_TYPE = useSelector((state: any) => state.themeReducer);
+  const { changeThemAction } = userThemStore((state) => state)
+  const { isDarkTheme } = userThemStore((state) => state.themStore)
+  useAuthStore((state) => state.useAuthStore)
+
   const { userLoginLogOutAction } = useAuthStore((state) => state)
 
   const { t } = useTranslation();
   const toggleSwitch = (value: boolean) => {
-    appDispatch(themSlice.actions.changeThemAction(value));
+    changeThemAction(value)
   }
 
   const removeUser = () => {
@@ -47,13 +48,13 @@ const SettingsScreen = () => {
         <LanguageSelector />
         <List.Item
           onPress={() => {
-            appDispatch(themSlice.actions.changeThemAction(!data.isDarkTheme));
+            changeThemAction(!isDarkTheme)
           }}
           title={t('darkLightMode')}
           description={t('changeAppTheme')}
           left={props => <List.Icon {...props} icon="theme-light-dark" />}
           right={() => (
-            <Switch value={data.isDarkTheme} onValueChange={toggleSwitch} />
+            <Switch value={isDarkTheme} onValueChange={toggleSwitch} />
           )}
         />
         <List.Item

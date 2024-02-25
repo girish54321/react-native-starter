@@ -1,6 +1,5 @@
 import React, { FC, useEffect, } from 'react';
-import { DARK_THEME_TYPE } from 'redux/themeStore/reducers';
-import { useDispatch, useSelector } from 'react-redux';
+import { userThemStore } from 'redux/themeStore/reducers';
 import {
     NavigationContainer,
     DefaultTheme as NavigationDefaultTheme,
@@ -17,19 +16,29 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { setTopLevelNavigator } from './NavigationService';
 import { AppBottomTab } from './appNavigation/AppNavigation';
 import AuthStackScreens from './authStack/AuthStackScreens';
-import { checkTheme } from 'redux/themeStore/action';
 import LoadingView from '@components/loadingView';
 import { useAuthStore } from 'redux/authStore/authReducers';
 
 export const Navigation: FC = () => {
-    const data: DARK_THEME_TYPE = useSelector((state: any) => state.themeReducer);
-    const authDispatch = useDispatch();
     const { checkUserLoginAction } = useAuthStore((state) => state)
+    const { changeThemAction } = userThemStore((state) => state)
+    const { isDarkTheme } = userThemStore((state) => state.themStore)
     const { isLoading, userLoggedIn } = useAuthStore((state) => state.useAuthStore)
 
+    const checkTheme = () => {
+        AsyncStorage.getItem(APP_CONST.CHECK_THEME).then((data) => {
+            if (data) {
+                const jsonValue = JSON.parse(data);
+                changeThemAction(jsonValue.isDarkTheme)
+            } else {
+                changeThemAction(false)
+
+            }
+        })
+    }
 
     useEffect(() => {
-        authDispatch(checkTheme());
+        checkTheme()
         checkIfLoggedIn();
     }, [])
 
@@ -81,14 +90,17 @@ export const Navigation: FC = () => {
         return <LoadingView />;
     }
 
+    console.log("App ");
+
+
     return (
-        <PaperProvider theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
-            <AppStatusBar isDarkTheme={data.isDarkTheme} />
+        <PaperProvider theme={isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
+            <AppStatusBar isDarkTheme={isDarkTheme} />
             <NavigationContainer
                 ref={(navigatorRef: any) => {
                     setTopLevelNavigator(navigatorRef);
                 }}
-                theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
+                theme={isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
                 {userLoggedIn ? (
                     <AppBottomTab />
                 ) : (
