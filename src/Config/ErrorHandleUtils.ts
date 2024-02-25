@@ -1,8 +1,8 @@
 import { Alert } from "react-native";
 import RNRestart from 'react-native-restart';
 
-export function handleApiError(error?: any, appDispatch?: any) {
-    Alert.alert("Error",error?.error || error)
+export function handleApiError(error?: any) {
+    Alert.alert("Error", error?.error || error)
 }
 
 function isDisplayError(message: string) {

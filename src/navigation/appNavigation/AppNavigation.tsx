@@ -14,7 +14,6 @@ const Tab = createBottomTabNavigator();
 
 export const AppBottomTab = () => {
     const { t } = useTranslation();
-
     return (
         <>
             <AppLoaderModal />

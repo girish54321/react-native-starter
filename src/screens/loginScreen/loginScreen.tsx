@@ -7,13 +7,13 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { TextInput, Button, useTheme, } from 'react-native-paper';
-import { userLoginAction } from '../../redux/authStore/action';
+import { useUserLoginAction } from '../../redux/authStore/action';
 import { Colors } from 'Config/Colors';
 import SizedBox from '@components/SizedBox';
 const LoginScreen = () => {
   const paperTheme = useTheme();
+  const { userLogin } = useUserLoginAction()
   const [userData, setuserData] = useState({
     email: '',
     password: '',
@@ -22,17 +22,15 @@ const LoginScreen = () => {
     isValidPassword: false,
   });
   const data = NativeModules.RNConfigModule;
+  // console.log("data", data); //* Get Data form Native Code
 
-  console.log("data", data); //* Get Data form Native Code
-
-  const authDispatch = useDispatch();
   const saveUserLogin = () => {
     if (userData.isValidEmail && userData.isValidPassword) {
       let data = {
         email: "eve.holt@reqres.in",
         password: "cityslicka"
       };
-      authDispatch(userLoginAction(data))
+      userLogin(data)
     } else {
 
     }

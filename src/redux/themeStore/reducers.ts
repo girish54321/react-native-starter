@@ -1,44 +1,38 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { APP_CONST } from 'Config/Colors';
+import { create } from 'zustand';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
-export interface DARK_THEME_TYPE {
-  isDarkTheme: boolean
-}
-
-const INITIAL_STATE: DARK_THEME_TYPE = {
+const INITIAL_STATE = {
   isDarkTheme: false
 }
 
-const changeThemAction = (state: DARK_THEME_TYPE, action: any) => {
-  const jsonValue = JSON.stringify({ isDarkTheme: action.payload })
-  AsyncStorage.setItem(APP_CONST.CHECK_THEME, jsonValue);
-  return {
-    ...state,
-    isDarkTheme: action.payload
-  }
+interface DD {
+  isDarkTheme: boolean
 }
-
-const checkThemAction = (state: DARK_THEME_TYPE, action: PayloadAction<boolean>) => {
-  return {
-    ...state,
-    isDarkTheme: action.payload
-  }
+export interface DARK_THEME_TYPE {
+  themStore: DD;
+  checkThemAction: (isDarkTheme: boolean) => void;
+  changeThemAction: (data: any) => void;
 }
 
 
-export const themSlice = createSlice({
-  name: "themSlice",
-  initialState: INITIAL_STATE,
-  reducers: {
-    changeThemAction: (state, action: PayloadAction<DARK_THEME_TYPE>) => {
-      return changeThemAction(state, action)
-    },
-    checkThemAction: (state, action: PayloadAction<boolean>) => {
-      return checkThemAction(state, action)
-    },
-  },
-});
+export const userThemStore = create<DARK_THEME_TYPE>()((set) => ({
+  themStore: INITIAL_STATE,
+  checkThemAction: (data) => set((state) => ({
+    themStore: {
+      ...state.themStore, isDarkTheme: data
+    }
+  })),
+  changeThemAction: async (data) => {
+    const jsonValue = JSON.stringify({ isDarkTheme: data })
+    AsyncStorage.setItem(APP_CONST.CHECK_THEME, jsonValue);
+    await changeNavigationBarColor(data ? '#000000' : '#ffffff', !data);
+    return set((state) => ({
+      themStore: {
+        ...state.themStore, isDarkTheme: data
+      }
+    }))
+  }
+}))
 
-
-export default themSlice.reducer;

@@ -1,6 +1,5 @@
 import React, { FC, useEffect, } from 'react';
-import { DARK_THEME_TYPE } from 'redux/themeStore/reducers';
-import { useDispatch, useSelector } from 'react-redux';
+import { userThemStore } from 'redux/themeStore/reducers';
 import {
     NavigationContainer,
     DefaultTheme as NavigationDefaultTheme,
@@ -13,22 +12,33 @@ import {
 } from 'react-native-paper'
 import { APP_CONST, Colors } from '../Config/Colors'
 import AppStatusBar from '@components/appStatusBar/appStatusBar';
-import { authSlice } from 'redux/authStore/authReducers';
 import AsyncStorage from '@react-native-community/async-storage';
 import { setTopLevelNavigator } from './NavigationService';
 import { AppBottomTab } from './appNavigation/AppNavigation';
 import AuthStackScreens from './authStack/AuthStackScreens';
-import { checkTheme } from 'redux/themeStore/action';
 import LoadingView from '@components/loadingView';
+import { useAuthStore } from 'redux/authStore/authReducers';
 
 export const Navigation: FC = () => {
-    const data: DARK_THEME_TYPE = useSelector((state: any) => state.themeReducer);
-    const authState = useSelector((state: any) => state.authReducer);
-    const authDispatch = useDispatch();
-    console.log("authState3", authState);
+    const { checkUserLoginAction } = useAuthStore((state) => state)
+    const { changeThemAction } = userThemStore((state) => state)
+    const { isDarkTheme } = userThemStore((state) => state.themStore)
+    const { isLoading, userLoggedIn } = useAuthStore((state) => state.useAuthStore)
+
+    const checkTheme = () => {
+        AsyncStorage.getItem(APP_CONST.CHECK_THEME).then((data) => {
+            if (data) {
+                const jsonValue = JSON.parse(data);
+                changeThemAction(jsonValue.isDarkTheme)
+            } else {
+                changeThemAction(false)
+
+            }
+        })
+    }
 
     useEffect(() => {
-        authDispatch(checkTheme());
+        checkTheme()
         checkIfLoggedIn();
     }, [])
 
@@ -37,13 +47,13 @@ export const Navigation: FC = () => {
             .then((value) => {
                 if (value) {
                     let data = JSON.parse(value);
-                    authDispatch(authSlice.actions.checkUserLoginAction(data));
+                    checkUserLoginAction(data)
                 } else {
-                    authDispatch(authSlice.actions.checkUserLoginAction(null));
+                    checkUserLoginAction(null)
                 }
             })
             .catch(() => {
-                authDispatch(authSlice.actions.checkUserLoginAction(null));
+                checkUserLoginAction(null)
             });
     };
 
@@ -75,19 +85,19 @@ export const Navigation: FC = () => {
         }
     }
 
-    if (authState.isLoading) {
+    if (isLoading) {
         return <LoadingView />;
     }
 
     return (
-        <PaperProvider theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
-            <AppStatusBar isDarkTheme={data.isDarkTheme} />
+        <PaperProvider theme={isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
+            <AppStatusBar isDarkTheme={isDarkTheme} />
             <NavigationContainer
                 ref={(navigatorRef: any) => {
                     setTopLevelNavigator(navigatorRef);
                 }}
-                theme={data.isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
-                {authState.userLoggedIn ? (
+                theme={isDarkTheme ? CustomDarkTheme : CustomDefaultTheme}>
+                {userLoggedIn ? (
                     <AppBottomTab />
                 ) : (
                     <AuthStackScreens />

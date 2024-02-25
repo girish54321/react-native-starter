@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { APP_CONST } from 'Config/Colors';
+import { create } from 'zustand';
 
 interface AUTH_TYPE {
   isLoading: boolean;
@@ -18,35 +18,58 @@ const INITIAL_STATE: AUTH_TYPE = {
   token: null,
 };
 
+interface IUseUserListStore {
+  useAuthStore: AUTH_TYPE;
+  userLoginAction: (data: any) => void;
+  setUserLoadingAction: (payload: any) => void;
+  checkUserLoginAction: (payload: any) => void;
+  userLoginLogOutAction: () => void;
+}
 
-export const authSlice = createSlice({
-  name: "authSlice",
-  initialState: INITIAL_STATE,
-  reducers: {
-    userLoginAction: (state, action: PayloadAction<AUTH_TYPE>) => {
-      const jsonValue = JSON.stringify(action.payload);
-      AsyncStorage.setItem(APP_CONST.USER_LOGIN, jsonValue);
-      return { ...state, ...action.payload };
-    },
-    checkUserLoginAction: (state, action: PayloadAction<AUTH_TYPE | null>) => {
+export const useAuthStore = create<IUseUserListStore>()((set) => ({
+  useAuthStore: INITIAL_STATE,
+  userLoginAction: async (payload) => {
+    const jsonValue = JSON.stringify(payload);
+    await AsyncStorage.setItem(APP_CONST.USER_LOGIN, jsonValue);
+    return set(() => {
       return {
-        ...state,
-        ...action.payload,
-        isLoading: false,
+        useAuthStore: {
+          ...payload
+        }
       }
-    },
-    userLoginLogOutAction: (state) => {
-      AsyncStorage.removeItem(APP_CONST.USER_LOGIN);
-      return {
-        ...state,
-        isLoading: false,
-        userLoggedIn: false,
-        userName: null,
-        email: null,
-      };
-    },
+    });
   },
-});
-
-
-export default authSlice.reducer;
+  setUserLoadingAction: async (payload) => {
+    const jsonValue = JSON.stringify(payload);
+    await AsyncStorage.setItem(APP_CONST.USER_LOGIN, jsonValue);
+    return set(() => {
+      return {
+        useAuthStore: {
+          ...payload
+        }
+      }
+    });
+  },
+  checkUserLoginAction: async (payload) => {
+    return set(() => {
+      return {
+        useAuthStore: {
+          ...payload, isLoading: false
+        }
+      }
+    })
+  },
+  userLoginLogOutAction: async () => {
+    await AsyncStorage.removeItem(APP_CONST.USER_LOGIN);
+    return set(() => {
+      return {
+        useAuthStore: {
+          isLoading: false,
+          userLoggedIn: false,
+          userName: null,
+          email: null,
+        }
+      }
+    });
+  }
+}))
