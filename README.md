@@ -1,3 +1,14 @@
+# ⚠️ Warning: This Repository is Deprecated ⚠️ new [project](https://github.com/girish54321/React-Native-StarterApp) is here.
+
+## Why? 🤔
+
+Due to significant changes in React Native, maintaining this project has become challenging.
+What's Next? 🚀
+
+I've created a new and improved project using the latest version of React Native. 🎉 You can check it out [here](https://github.com/girish54321/React-Native-StarterApp).
+
+Thank you for understanding! 🙌
+
 # React Native TypeScript Starter with Flavors ❤️ now with Material 3
 
 ## Welcome
