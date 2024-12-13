@@ -54,6 +54,7 @@
     "react-native-encrypted-storage": "^2.1.0",
     "react-native-gesture-handler": "^1.5.3",
     "react-native-localize": "^1.4.0",
+    "react-native-navigation-bar-color": "^2.0.2",
     "react-native-paper": "^5.5.2",
     "react-native-reanimated": "^2.13.0",
     "react-native-restart": "^0.0.24",
@@ -66,7 +67,8 @@
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "tsyringe": "^4.0.1"
+    "tsyringe": "^4.0.1",
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

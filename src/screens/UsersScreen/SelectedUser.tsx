@@ -2,28 +2,16 @@ import { ScrollView } from "react-native-gesture-handler";
 import { AppView } from "@components/Flex/Flex";
 import { Avatar, Text } from "react-native-paper";
 import { scale } from "Config/ScalingUtils";
-import { UserList } from "models/responseType/UserListResponse";
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
+import { useUserListStore } from "redux/UserListStore/userListReducer";
 
 export const SelectedUserScreen = (props: any) => {
-    const data: UserList = props?.route?.params?.data
+    const { selected } = useUserListStore((state) => state.userListStore)
 
     useEffect(() => {
-        props.navigation.setOptions({ title: `${data.first_name} ${data.last_name}` })
+        props.navigation.setOptions({ title: `${selected?.first_name} ${selected?.last_name}` })
     }, [])
-
-    // ref
-    const bottomSheetRef = useRef<BottomSheet>(null);
-
-    // variables
-    const snapPoints = useMemo(() => ['25%', '50%'], []);
-
-    // callbacks
-    const handleSheetChanges = useCallback((index: number) => {
-        console.log('handleSheetChanges', index);
-    }, []);
 
     return (
         <AppView paddingRequired>
@@ -33,20 +21,11 @@ export const SelectedUserScreen = (props: any) => {
                     alignItems: 'center', height: scale(160),
                     marginTop: scale(14)
                 }}>
-                    <Avatar.Image size={scale(90)} source={{ uri: data?.avatar }} />
-                    <Text variant="headlineLarge">{data.first_name} {data.last_name}</Text>
-                    <Text variant="titleLarge">{data.email}</Text>
+                    <Avatar.Image size={scale(90)} source={{ uri: selected?.avatar }} />
+                    <Text variant="headlineLarge">{selected?.first_name} {selected?.last_name}</Text>
+                    <Text variant="titleLarge">{selected?.email}</Text>
                 </View>
             </ScrollView>
-            <BottomSheet
-                ref={bottomSheetRef}
-                snapPoints={snapPoints}
-                onChange={handleSheetChanges}
-            >
-                <View style={style.contentContainer}>
-                    <Text>Awesome 🎉</Text>
-                </View>
-            </BottomSheet>
         </AppView>
     );
 }
